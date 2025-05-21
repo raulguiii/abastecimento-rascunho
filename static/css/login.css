@@ -84,3 +84,58 @@ body{
     }
 }
 
+/* Ajuste geral para dispositivos móveis */
+@media (max-width: 576px) {
+    body {
+        padding: 10px;
+    }
+
+    .box-area {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .right-box {
+        padding: 20px;
+    }
+
+    .left-box .featured-image img {
+        max-width: 140px;
+    }
+
+    .left-box p {
+        font-size: 1.2rem;
+    }
+
+    .left-box small {
+        font-size: 0.8rem;
+    }
+
+    .form-control {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .header-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .header-text p {
+        font-size: 0.9rem;
+    }
+
+    .alert {
+        font-size: 0.85rem;
+        padding: 5px 10px;
+    }
+
+    .input-group .btn {
+        padding: 5px 8px;
+    }
+}
+
