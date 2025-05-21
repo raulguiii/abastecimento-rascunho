@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abastecimento - SEMECTI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='image/logopref.png') }}">
+</head>
+
+<body>
+    <div class="wrapper">
+        <aside id="sidebar" class="js-sidebar">
+            <div class="h-100">
+                <div class="sidebar-logo">
+                    <a href="#" onclick="location.reload(); return false;"><img src="static/image/abastecimentoicon.png" alt="Ícone de abastecimento" style="width: 24px; height: 24px; margin-right: 8px;">Abastecimento</a>
+                </div>                
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header">Menu</li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link tab-link" data-tab="todosdados">
+                            <i class="fa-solid fa-list pe-2"></i> <strong>INÍCIO</strong>
+                        </a>
+                    </li>
+                </ul>
+    
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header">Departamentos</li>
+                
+                    <!-- ALMOXARIFADO -->
+                    <li class="sidebar-item" {% if departamento_usuario in ['Casa_de_Projetos','Comunicação', 'DEE', 'Engenharia_Manutenção', 'Engenharia_Projetos', 'Gabinete', 'Informática','Logística', 'Núcleo', 'Nutrição', 'Supervisão', 'Vigilância' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#almoxarifado" data-bs-toggle="collapse">
+                            <i class="fa-solid fa-file-lines pe-2"></i> <strong>ALMOXARIFADO</strong>
+                        </a>
+                        <ul id="almoxarifado" class="sidebar-dropdown list-unstyled collapse">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link tab-link" data-tab="almoxarifadoAut">ㅤㅤㅤ- Autorização</a>
+                            </li>
+                            <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                                <a href="#" class="sidebar-link tab-link" data-tab="almoxarifadoHist">ㅤㅤㅤ- Histórico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item" {% if departamento_usuario in ['Almoxarifado','Comunicação', 'DEE', 'Engenharia_Manutenção', 'Engenharia_Projetos', 'Gabinete', 'Informática','Logística', 'Núcleo', 'Nutrição', 'Supervisão', 'Vigilância' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#casaDeProjetos" data-bs-toggle="collapse">
+                            <i class="fa-solid fa-file-lines pe-2"></i> <strong>CASA DE PROJETOS</strong>
+                        </a>
+                        <ul id="casaDeProjetos" class="sidebar-dropdown list-unstyled collapse">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link tab-link" data-tab="casaDeProjetosAut">ㅤㅤㅤ- Autorização</a>
+                            </li>
+                            <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                                <a href="#" class="sidebar-link tab-link" data-tab="casaDeProjetosHist">ㅤㅤㅤ- Histórico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item" {% if departamento_usuario in ['Casa_de_Projetos','Almoxarifado', 'DEE', 'Engenharia_Manutenção', 'Engenharia_Projetos', 'Gabinete', 'Informática','Logística', 'Núcleo', 'Nutrição', 'Supervisão', 'Vigilância' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#comunicacao" data-bs-toggle="collapse">
+                            <i class="fa-solid fa-file-lines pe-2"></i> <strong>COMUNICAÇÃO</strong>
+                        </a>
+                        <ul id="comunicacao" class="sidebar-dropdown list-unstyled collapse">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link tab-link" data-tab="comunicacaoAut">ㅤㅤㅤ- Autorização</a>
+                            </li>
+                            <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                                <a href="#" class="sidebar-link tab-link" data-tab="comunicacaoHist">ㅤㅤㅤ- Histórico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item" {% if departamento_usuario in ['Casa_de_Projetos','Almoxarifado', 'Comunicação', 'Engenharia_Manutenção', 'Engenharia_Projetos', 'Gabinete', 'Informática','Logística', 'Núcleo', 'Nutrição', 'Supervisão', 'Vigilância' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#dee" data-bs-toggle="collapse">
+                            <i class="fa-solid fa-file-lines pe-2"></i> <strong>DEE</strong>
+                        </a>
+                        <ul id="dee" class="sidebar-dropdown list-unstyled collapse">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link tab-link" data-tab="deeAut">ㅤㅤㅤ- Autorização</a>
+                            </li>
+                            <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                                <a href="#" class="sidebar-link tab-link" data-tab="deeHist">ㅤㅤㅤ- Histórico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item" {% if departamento_usuario in ['Almoxarifado','Comunicação', 'DEE', 'Casa_de_Projetos', 'Engenharia_Projetos', 'Gabinete', 'Informática','Logística', 'Núcleo', 'Nutrição', 'Supervisão', 'Vigilância' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#engenhariaMan" data-bs-toggle="collapse">
+                            <i class="fa-regular fa-user pe-2"></i> <strong>ENGENHARIA - MANUTENÇÃO</strong>
+                        </a>
+                        <ul id="engenhariaMan" class="sidebar-dropdown list-unstyled collapse">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link tab-link" data-tab="engenhariaManAut">ㅤㅤㅤ- Autorização</a>
+                            </li>
+                            <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                                <a href="#" class="sidebar-link tab-link" data-tab="engenhariaManHist">ㅤㅤㅤ- Histórico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item" {% if departamento_usuario in ['Almoxarifado','Comunicação', 'DEE', 'Casa_de_Projetos', 'Engenharia_Manutenção', 'Gabinete', 'Informática','Logística', 'Núcleo', 'Nutrição', 'Supervisão', 'Vigilância' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#engenhariaProj" data-bs-toggle="collapse">
+                            <i class="fa-solid fa-sliders pe-2"></i> <strong>ENGENHARIA - PROJETOS</strong>
+                        </a>
+                        <ul id="engenhariaProj" class="sidebar-dropdown list-unstyled collapse">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link tab-link" data-tab="engenhariaProjAut">ㅤㅤㅤ- Autorização</a>
+                            </li>
+                            <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                                <a href="#" class="sidebar-link tab-link" data-tab="engenhariaProjHist">ㅤㅤㅤ- Histórico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item" {% if departamento_usuario in ['Almoxarifado','Comunicação', 'DEE', 'Casa_de_Projetos', 'Engenharia_Manutenção', 'Engenharia_Projetos', 'Informática','Logística', 'Núcleo', 'Nutrição', 'Supervisão', 'Vigilância' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#gabinete" data-bs-toggle="collapse">
+                            <i class="fa-solid fa-file-lines pe-2"></i> <strong>GABINETE</strong>
+                        </a>
+                        <ul id="gabinete" class="sidebar-dropdown list-unstyled collapse">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link tab-link" data-tab="gabineteAut">ㅤㅤㅤ- Autorização</a>
+                            </li>
+                            <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                                <a href="#" class="sidebar-link tab-link" data-tab="gabineteHist">ㅤㅤㅤ- Histórico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item" {% if departamento_usuario in ['Almoxarifado','Comunicação', 'DEE', 'Casa_de_Projetos', 'Engenharia_Manutenção', 'Engenharia_Projetos', 'Gabinete','Logística', 'Núcleo', 'Nutrição', 'Supervisão', 'Vigilância' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#informatica" data-bs-toggle="collapse">
+                            <i class="fa-regular fa-user pe-2"></i> <strong>INFORMÁTICA</strong>
+                        </a>
+                        <ul id="informatica" class="sidebar-dropdown list-unstyled collapse">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link tab-link" data-tab="informaticaAut">ㅤㅤㅤ- Autorização</a>
+                            </li>
+                            <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                                <a href="#" class="sidebar-link tab-link" data-tab="informaticaHist">ㅤㅤㅤ- Histórico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item" {% if departamento_usuario in ['Almoxarifado','Comunicação', 'DEE', 'Casa_de_Projetos', 'Engenharia_Manutenção', 'Engenharia_Projetos', 'Gabinete','Informática', 'Núcleo', 'Nutrição', 'Supervisão', 'Vigilância' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#logistica" data-bs-toggle="collapse">
+                            <i class="fa-regular fa-user pe-2"></i> <strong>LOGÍSTICA</strong>
+                        </a>
+                        <ul id="logistica" class="sidebar-dropdown list-unstyled collapse">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link tab-link" data-tab="logisticaAut">ㅤㅤㅤ- Autorização</a>
+                            </li>
+                            <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                                <a href="#" class="sidebar-link tab-link" data-tab="logisticaHist">ㅤㅤㅤ- Histórico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item" {% if departamento_usuario in ['Almoxarifado','Comunicação', 'DEE', 'Casa_de_Projetos', 'Engenharia_Manutenção', 'Engenharia_Projetos', 'Gabinete','Logística', 'Informática', 'Nutrição', 'Supervisão', 'Vigilância' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#nucleo" data-bs-toggle="collapse"
+                            aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
+                            <strong>NÚCLEO</strong>
+                        </a>
+                        <ul id="nucleo" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link tab-link" data-tab="nucleoAut">ㅤㅤㅤ- Autorização</a>
+                            </li>
+                            <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                                <a href="#" class="sidebar-link tab-link" data-tab="nucleoHist">ㅤㅤㅤ- Histórico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item" {% if departamento_usuario in ['Almoxarifado','Comunicação', 'DEE', 'Casa_de_Projetos', 'Engenharia_Manutenção', 'Engenharia_Projetos', 'Gabinete','Logística', 'Informática', 'Núcleo', 'Supervisão', 'Vigilância' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#nutricao" data-bs-toggle="collapse"
+                            aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
+                        <strong>NUTRIÇÃO</strong>
+                        </a>
+                        <ul id="nutricao" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link tab-link" data-tab="nutricaoAut">ㅤㅤㅤ- Autorização</a>
+                            </li>
+                            <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                                <a href="#" class="sidebar-link tab-link" data-tab="nutricaoHist">ㅤㅤㅤ- Histórico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item" {% if departamento_usuario in ['Almoxarifado','Comunicação', 'DEE', 'Casa_de_Projetos', 'Engenharia_Manutenção', 'Engenharia_Projetos', 'Gabinete','Logística', 'Informática', 'Núcleo', 'Nutrição', 'Vigilância' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#supervisao" data-bs-toggle="collapse"
+                            aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
+                        <strong>SUPERVISÃO</strong>
+                        </a>
+                        <ul id="supervisao" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link tab-link" data-tab="supervisaoAut">ㅤㅤㅤ- Autorização</a>
+                            </li>
+                            <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                                <a href="#" class="sidebar-link tab-link" data-tab="supervisaoHist">ㅤㅤㅤ- Histórico</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item" {% if departamento_usuario in ['Almoxarifado','Comunicação', 'DEE', 'Casa_de_Projetos', 'Engenharia_Manutenção', 'Engenharia_Projetos', 'Gabinete','Logística', 'Informática', 'Núcleo', 'Nutrição', 'Supervisão' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link collapsed" data-bs-target="#vigilancia" data-bs-toggle="collapse"
+                            aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
+                        <strong>VIGILÂNCIA</strong>
+                        </a>
+                        <ul id="vigilancia" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <a href="#" class="sidebar-link tab-link" data-tab="vigilanciaAut">ㅤㅤㅤ- Autorização</a>
+                            </li>
+                            <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                                <a href="#" class="sidebar-link tab-link" data-tab="vigilanciaHist">ㅤㅤㅤ- Histórico</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        
+        
+        <!--MENU SIDEBAR-->
+        <div class="main">
+            <nav class="navbar navbar-expand px-3 border-bottom">
+                <button class="btn btn-dark" id="sidebar-toggle" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>                
+                <div class="navbar-collapse navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown d-flex align-items-center">
+                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                <img src="static/image/user.png" class="avatar img-fluid rounded" alt="">
+                            </a>
+                            <div class="d-flex flex-column">
+                                <span class="fw-bold" style="font-size: 16px;">{{ session['usuario'] }}</span>
+                                <span class="text-muted" style="font-size: 12px;">{{ session['departamento'] }}</span>
+                            </div>                            
+                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0 ms-2">
+                                <i class="bi bi-caret-down-fill"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a href="https://drive.google.com/drive/folders/1LXRANJmybVCRgCoePULg0B0r5o_u9vn3?usp=drive_link" class="dropdown-item" id="comprovantes-link" target="_blank" {% if departamento_usuario in ['Almoxarifado','Comunicação', 'DEE', 'Casa_de_Projetos', 'Engenharia_Projetos', 'Gabinete', 'Informática','Logística', 'Núcleo', 'Nutrição', 'Supervisão', 'Vigilância' ] %}style="display: none;"{% endif %}>Comprovantes</a>
+                                <a href="{{ url_for('logout') }}" class="dropdown-item" id="logout-link">Sair</a>
+                            </div>                            
+                        </li>
+                    </ul>
+                </div>                       
+            </nav>            
+            
+            
+            <!-- Conteúdo das Abas -->
+            <div class="container-fluid">
+                <div class="tab-content">
+                    <div id="todosdados" class="tab-pane fade show active">
+                        <h3>Início</h3>
+            <p>📌 <strong>Abastecimento / Instruções</strong></p>
+            
+            <h4 class="mt-4">🚗 <strong>Bem-vindo ao Sistema de Abastecimento da SEMECTI</strong></h4>
+            <p>Este site foi desenvolvido para registrar e organizar todos os abastecimentos de forma eficiente e transparente. Para garantir o uso correto, siga atentamente as instruções abaixo.</p>
+            
+            <h4 class="mt-4">📋 Como Funciona?</h4>
+            <p>O sistema é dividido por <strong>departamentos</strong>, e cada um possui sua própria aba e cadastro. Os funcionários <strong>somente podem acessar a aba correspondente ao seu departamento</strong>, então fique atento a essa regra.</p>
+            
+            <h4 class="mt-4">🔑 Como Criar uma Conta?</h4>
+            <p>Para obter acesso ao sistema, entre em contato com <strong>Raul</strong> e envie os seguintes dados:</p>
+            <ul class="list-unstyled">
+                <li>✅ Nome completo</li>
+                <li>✅ RGF</li>
+                <li>✅ Cargo</li>
+                <li>✅ Departamento</li>
+            </ul>
+            
+            <h4 class="mt-4">⚙️ Funcionalidades do Sistema</h4>
+            
+            <h5 class="mt-3">📝 Autorização de Abastecimento</h5>
+            <p>Após abastecer, você deve preencher os seguintes dados:</p>
+            <ul class="list-unstyled">
+                <li>📌 Nome</li>
+                <li>📌 RGF</li>
+                <li>📌 KM atual do veículo</li>
+                <li>📌 Placa do veículo</li>
+                <li>📌 Nome do posto</li>
+                <li>📌 Data do abastecimento</li>
+                <li>📸 <strong>Foto do comprovante de pagamento</strong></li>
+            </ul>
+            
+            <h5 class="mt-3">📂 Histórico de Abastecimentos</h5>
+            <p>Na aba histórico você pode visualizar todos os abastecimentos do mês atual, com detalhes e acesso aos comprovantes. <strong>Os comprovantes ficam disponíveis somente até o final do mês</strong>. Após esse período, os registros são transferidos para uma aba exclusiva, acessível apenas pelos diretores de departamento.</p>
+            
+            <p class="mt-4">🔔 <strong>Mantenha suas informações sempre atualizadas e siga as diretrizes para o bom funcionamento do sistema.</strong></p>
+            <p>❓ <strong>Caso tenha dúvidas, entre em contato com o responsável pelo seu departamento.</strong></p>
+        </div>
+                    
+
+                    <!-- A L M O X A R I F A D O -->
+
+                    <!--ALMOXARIFADO AUTORIZAÇÃO-->    
+                    <div id="almoxarifadoAut" class="tab-pane fade">
+                        <h3>
+                            <img src="static/image/estoque.png" alt="Ícone de Estoque" style="width: 24px; height: 24px; margin-right: 8px;">
+                            ALMOXARIFADO
+                        </h3>                        
+                        <p>Preencha após realizar o abastecimento</p>
+                        <form class="mt-3" action="/abastecimentoAlmoxarifadoAut" method="POST" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome:</label>
+                                <input type="text" class="form-control" id="nome" name="nome" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="rgf" class="form-label">RGF:</label>
+                                <input type="text" class="form-control" id="rgf" name="rgf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="km" class="form-label">KM:</label>
+                                <input type="number" class="form-control" id="km" name="km" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="placa" class="form-label">Placa:</label>
+                                <input type="text" class="form-control" id="placa" name="placa" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="data" class="form-label">Data:</label>
+                                <input type="date" class="form-control" id="data" name="data" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="posto" class="form-label">Posto:</label>
+                                <input type="text" class="form-control" id="posto" name="posto" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="comprovante" class="form-label">Comprovante (PNG):</label>
+                                <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </form>                     
+        </div>
+ 
+                <!-- ALMOXARIFADO HISTORICO -->    
+<div id="almoxarifadoHist" class="tab-pane fade">
+    <h3>
+        <img src="static/image/estoque.png" alt="Ícone de Estoque" style="width: 24px; height: 24px; margin-right: 8px;">
+        ALMOXARIFADO
+    </h3>                        
+    <p>Todos abastecimentos realizados em Março</p>
+    <div style="overflow-x: auto; max-width: 100%;">
+        <table border="1" style="width: 100%; min-width: 600px;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>RGF</th>
+                <th>KM</th>
+                <th>Placa</th>
+                <th>Data</th>
+                <th>Posto</th>
+                <th>Comprovante</th>
+            </tr>
+        </thead>
+        <tbody id="tabelaAbastecimentosAlmox">
+            <!-- Os dados serão preenchidos dinamicamente -->
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    fetch("/abastecimentoAlmoxarifadoHist")
+        .then(response => response.json())
+        .then(data => {
+            const tabela = document.getElementById("tabelaAbastecimentosAlmox");
+            data.forEach(abastecimento => {
+                const row = `<tr>
+                    <td>${abastecimento.id}</td>
+                    <td>${abastecimento.nome}</td>
+                    <td>${abastecimento.rgf}</td>
+                    <td>${abastecimento.km}</td>
+                    <td>${abastecimento.placa}</td>
+                    <td>${abastecimento.data}</td>
+                    <td>${abastecimento.posto}</td>
+                    <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                </tr>`;
+                tabela.innerHTML += row;
+            });
+        })
+        .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+                <!-- C A S A     D E      P R O J E T O S -->
+
+                <!--CASA DE PROJETOS AUTORIZAÇÃO-->    
+                <div id="casaDeProjetosAut" class="tab-pane fade">
+                    <h3>
+                        <img src="static/image/planta-da-casa.png" alt="Ícone de Casa de Projetos" style="width: 24px; height: 24px; margin-right: 8px;">
+                        CASA DE PROJETOS
+                    </h3>                        
+                    <p>Preencha após realizar o abastecimento</p>
+                    <form class="mt-3" action="/abastecimentoCasaDeProjetosAut" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" id="nome" name="nome" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rgf" class="form-label">RGF:</label>
+                            <input type="text" class="form-control" id="rgf" name="rgf" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="km" class="form-label">KM:</label>
+                            <input type="number" class="form-control" id="km" name="km" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="placa" class="form-label">Placa:</label>
+                            <input type="text" class="form-control" id="placa" name="placa" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="data" class="form-label">Data:</label>
+                            <input type="date" class="form-control" id="data" name="data" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="posto" class="form-label">Posto:</label>
+                            <input type="text" class="form-control" id="posto" name="posto" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="comprovante" class="form-label">Comprovante (PNG):</label>
+                            <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>                     
+    </div>
+
+            <!--CASA DE PROJETOS HISTORICO-->    
+            <div id="casaDeProjetosHist" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/planta-da-casa.png" alt="Ícone de Casa de Projetos" style="width: 24px; height: 24px; margin-right: 8px;">
+                    CASA DE PROJETOS
+                </h3>
+                <p>Todos abastecimentos realizados em Março</p>
+                <div style="overflow-x: auto; max-width: 100%;">
+                    <table border="1" style="width: 100%; min-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>RGF</th>
+                            <th>KM</th>
+                            <th>Placa</th>
+                            <th>Data</th>
+                            <th>Posto</th>
+                            <th>Comprovante</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaAbastecimentosCasaDeProjetos">
+                        <!-- Os dados serão preenchidos dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch("/abastecimentoCasaDeProjetosHist")
+                    .then(response => response.json())
+                    .then(data => {
+                        const tabela = document.getElementById("tabelaAbastecimentosCasaDeProjetos");
+                        data.forEach(abastecimento => {
+                            const row = `<tr>
+                                <td>${abastecimento.id}</td>
+                                <td>${abastecimento.nome}</td>
+                                <td>${abastecimento.rgf}</td>
+                                <td>${abastecimento.km}</td>
+                                <td>${abastecimento.placa}</td>
+                                <td>${abastecimento.data}</td>
+                                <td>${abastecimento.posto}</td>
+                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                            </tr>`;
+                            tabela.innerHTML += row;
+                        });
+                    })
+                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+            });
+            </script>
+                  
+
+
+
+
+
+                    
+                    
+                    
+                    <!-- C O M U N I C A C A O  -->
+
+                <!--COMUNICACAO AUTORIZAÇÃO-->    
+                <div id="comunicacaoAut" class="tab-pane fade">
+                    <h3>
+                        <img src="static/image/820508.png" alt="Ícone de COMUNICAÇÃO" style="width: 24px; height: 24px; margin-right: 8px;">
+                        COMUNICAÇÃO
+                    </h3>                        
+                    <p>Preencha após realizar o abastecimento</p>
+                    <form class="mt-3" action="/abastecimentoComunAut" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" id="nome" name="nome" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rgf" class="form-label">RGF:</label>
+                            <input type="text" class="form-control" id="rgf" name="rgf" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="km" class="form-label">KM:</label>
+                            <input type="number" class="form-control" id="km" name="km" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="placa" class="form-label">Placa:</label>
+                            <input type="text" class="form-control" id="placa" name="placa" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="data" class="form-label">Data:</label>
+                            <input type="date" class="form-control" id="data" name="data" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="posto" class="form-label">Posto:</label>
+                            <input type="text" class="form-control" id="posto" name="posto" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="comprovante" class="form-label">Comprovante (PNG):</label>
+                            <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>                     
+    </div>
+
+            <!--COMUNICACAO HISTORICO-->    
+            <div id="comunicacaoHist" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/820508.png" alt="Ícone de COMUNICAÇÃO" style="width: 24px; height: 24px; margin-right: 8px;">
+                    COMUNICAÇÃO
+                </h3>
+                <p>Todos abastecimentos realizados em Março</p>
+                <div style="overflow-x: auto; max-width: 100%;">
+                    <table border="1" style="width: 100%; min-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>RGF</th>
+                            <th>KM</th>
+                            <th>Placa</th>
+                            <th>Data</th>
+                            <th>Posto</th>
+                            <th>Comprovante</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaAbastecimentosComunicacao">
+                        <!-- Os dados serão preenchidos dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch("/abastecimentoComunHist")
+                    .then(response => response.json())
+                    .then(data => {
+                        const tabela = document.getElementById("tabelaAbastecimentosComunicacao");
+                        data.forEach(abastecimento => {
+                            const row = `<tr>
+                                <td>${abastecimento.id}</td>
+                                <td>${abastecimento.nome}</td>
+                                <td>${abastecimento.rgf}</td>
+                                <td>${abastecimento.km}</td>
+                                <td>${abastecimento.placa}</td>
+                                <td>${abastecimento.data}</td>
+                                <td>${abastecimento.posto}</td>
+                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                            </tr>`;
+                            tabela.innerHTML += row;
+                        });
+                    })
+                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+            });
+            </script>
+                  
+
+
+
+
+
+                    
+                    
+   
+                    <!-- D E E -->
+
+                <!--DEE AUTORIZAÇÃO-->    
+                <div id="deeAut" class="tab-pane fade">
+                    <h3>
+                        <img src="static/image/4914553.png" alt="Ícone de DEE" style="width: 24px; height: 24px; margin-right: 8px;">
+                        DEE
+                    </h3>                        
+                    <p>Preencha após realizar o abastecimento</p>
+                    <form class="mt-3" action="/abastecimentoDEEAut" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="nome" class="form-label">Nome:</label>
+                            <input type="text" class="form-control" id="nome" name="nome" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rgf" class="form-label">RGF:</label>
+                            <input type="text" class="form-control" id="rgf" name="rgf" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="km" class="form-label">KM:</label>
+                            <input type="number" class="form-control" id="km" name="km" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="placa" class="form-label">Placa:</label>
+                            <input type="text" class="form-control" id="placa" name="placa" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="data" class="form-label">Data:</label>
+                            <input type="date" class="form-control" id="data" name="data" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="posto" class="form-label">Posto:</label>
+                            <input type="text" class="form-control" id="posto" name="posto" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="comprovante" class="form-label">Comprovante (PNG):</label>
+                            <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>                     
+    </div>
+
+            <!--DEE HISTORICO-->    
+            <div id="deeHist" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/4914553.png" alt="Ícone de DEE" style="width: 24px; height: 24px; margin-right: 8px;">
+                    DEE
+                </h3>
+                <p>Todos abastecimentos realizados em Março</p>
+                <div style="overflow-x: auto; max-width: 100%;">
+                    <table border="1" style="width: 100%; min-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>RGF</th>
+                            <th>KM</th>
+                            <th>Placa</th>
+                            <th>Data</th>
+                            <th>Posto</th>
+                            <th>Comprovante</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaAbastecimentosDEE">
+                        <!-- Os dados serão preenchidos dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch("/abastecimentoDEEHist")
+                    .then(response => response.json())
+                    .then(data => {
+                        const tabela = document.getElementById("tabelaAbastecimentosDEE");
+                        data.forEach(abastecimento => {
+                            const row = `<tr>
+                                <td>${abastecimento.id}</td>
+                                <td>${abastecimento.nome}</td>
+                                <td>${abastecimento.rgf}</td>
+                                <td>${abastecimento.km}</td>
+                                <td>${abastecimento.placa}</td>
+                                <td>${abastecimento.data}</td>
+                                <td>${abastecimento.posto}</td>
+                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                            </tr>`;
+                            tabela.innerHTML += row;
+                        });
+                    })
+                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+            });
+            </script>
+
+
+        
+
+
+         
+
+
+            <!-- E N G E N H A R I A        M A N U T E N Ç A O  -->
+
+            <!--ENGENHARIA MANUTENÇÃO AUTORIZACAO-->
+            <div id="engenhariaManAut" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/1077147.png" alt="Ícone de Engenharia MANUTENÇÃO" style="width: 24px; height: 24px; margin-right: 8px;">
+                    ENGENHARIA - MANUTENÇÃO
+                </h3>                        
+                <p>Preencha após realizar o abastecimento</p>
+                <form class="mt-3" action="/abastecimentoEng1Aut" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rgf" class="form-label">RGF:</label>
+                        <input type="text" class="form-control" id="rgf" name="rgf" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="km" class="form-label">KM:</label>
+                        <input type="number" class="form-control" id="km" name="km" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="placa" class="form-label">Placa:</label>
+                        <input type="text" class="form-control" id="placa" name="placa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data:</label>
+                        <input type="date" class="form-control" id="data" name="data" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="posto" class="form-label">Posto:</label>
+                        <input type="text" class="form-control" id="posto" name="posto" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comprovante" class="form-label">Comprovante (PNG):</label>
+                        <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+    </div>
+
+            <!--ENGENHARIA MANUTENÇÃO HISTORICO-->
+            <div id="engenhariaManHist" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/1077147.png" alt="Ícone de DEE" style="width: 24px; height: 24px; margin-right: 8px;">
+                    ENGENHARIA MANUTENÇÃO
+                </h3>
+                <p>Todos abastecimentos realizados em Março</p>
+                <div style="overflow-x: auto; max-width: 100%;">
+                    <table border="1" style="width: 100%; min-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>RGF</th>
+                            <th>KM</th>
+                            <th>Placa</th>
+                            <th>Data</th>
+                            <th>Posto</th>
+                            <th>Comprovante</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaAbastecimentosEng1">
+                        <!-- Os dados serão preenchidos dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch("/abastecimentoEng1Hist")
+                    .then(response => response.json())
+                    .then(data => {
+                        const tabela = document.getElementById("tabelaAbastecimentosEng1");
+                        data.forEach(abastecimento => {
+                            const row = `<tr>
+                                <td>${abastecimento.id}</td>
+                                <td>${abastecimento.nome}</td>
+                                <td>${abastecimento.rgf}</td>
+                                <td>${abastecimento.km}</td>
+                                <td>${abastecimento.placa}</td>
+                                <td>${abastecimento.data}</td>
+                                <td>${abastecimento.posto}</td>
+                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                            </tr>`;
+                            tabela.innerHTML += row;
+                        });
+                    })
+                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+            });
+            </script>
+
+
+
+
+
+
+
+
+                    
+                    <!-- E N G E N H A R I A        P R O J E T O S  -->
+
+            <!--ENGENHARIA PROJETOS AUTORIZACAO-->
+            <div id="engenhariaProjAut" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/4538996.png" alt="Ícone de Engenharia PROJETOS" style="width: 24px; height: 24px; margin-right: 8px;">
+                    ENGENHARIA - PROJETOS
+                </h3>                        
+                <p>Preencha após realizar o abastecimento</p>
+                <form class="mt-3" action="/abastecimentoEng2Aut" method="POST" enctype="multipart/form-data">                    
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rgf" class="form-label">RGF:</label>
+                        <input type="text" class="form-control" id="rgf" name="rgf" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="km" class="form-label">KM:</label>
+                        <input type="number" class="form-control" id="km" name="km" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="placa" class="form-label">Placa:</label>
+                        <input type="text" class="form-control" id="placa" name="placa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data:</label>
+                        <input type="date" class="form-control" id="data" name="data" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="posto" class="form-label">Posto:</label>
+                        <input type="text" class="form-control" id="posto" name="posto" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comprovante" class="form-label">Comprovante (PNG):</label>
+                        <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+    </div>
+
+            <!--ENGENHARIA PROJETOS HISTORICO-->
+            <div id="engenhariaProjHist" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/4538996.png" alt="Ícone de DEE" style="width: 24px; height: 24px; margin-right: 8px;">
+                    ENGENHARIA PROJETOS
+                </h3>
+                <p>Todos abastecimentos realizados em Março</p>
+                <div style="overflow-x: auto; max-width: 100%;">
+                    <table border="1" style="width: 100%; min-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>RGF</th>
+                            <th>KM</th>
+                            <th>Placa</th>
+                            <th>Data</th>
+                            <th>Posto</th>
+                            <th>Comprovante</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaAbastecimentosEng2">
+                        <!-- Os dados serão preenchidos dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch("/abastecimentoEng2Hist")
+                    .then(response => response.json())
+                    .then(data => {
+                        const tabela = document.getElementById("tabelaAbastecimentosEng2");
+                        data.forEach(abastecimento => {
+                            const row = `<tr>
+                                <td>${abastecimento.id}</td>
+                                <td>${abastecimento.nome}</td>
+                                <td>${abastecimento.rgf}</td>
+                                <td>${abastecimento.km}</td>
+                                <td>${abastecimento.placa}</td>
+                                <td>${abastecimento.data}</td>
+                                <td>${abastecimento.posto}</td>
+                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                            </tr>`;
+                            tabela.innerHTML += row;
+                        });
+                    })
+                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+            });
+            </script>
+
+
+
+
+
+
+    
+    
+                    
+                    <!-- G A B I N E T E -->
+
+                    <!--GABINETE AUTORIZAÇÃO-->    
+                    <div id="gabineteAut" class="tab-pane fade">
+                        <h3>
+                            <img src="static/image/2541979.png" alt="Ícone de gabinete" style="width: 24px; height: 24px; margin-right: 8px;">
+                            GABINETE
+                        </h3>                        
+                        <p>Preencha após realizar o abastecimento</p>
+                        <form class="mt-3" action="/abastecimentoGabineteAut" method="POST" enctype="multipart/form-data">        
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome:</label>
+                                <input type="text" class="form-control" id="nome" name="nome" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="rgf" class="form-label">RGF:</label>
+                                <input type="text" class="form-control" id="rgf" name="rgf" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="km" class="form-label">KM:</label>
+                                <input type="number" class="form-control" id="km" name="km" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="placa" class="form-label">Placa:</label>
+                                <input type="text" class="form-control" id="placa" name="placa" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="data" class="form-label">Data:</label>
+                                <input type="date" class="form-control" id="data" name="data" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="posto" class="form-label">Posto:</label>
+                                <input type="text" class="form-control" id="posto" name="posto" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="comprovante" class="form-label">Comprovante (PNG):</label>
+                                <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </form>                     
+        </div>
+    
+                <!--GABINETE HISTORICO-->    
+                <div id="gabineteHist" class="tab-pane fade">
+                    <h3>
+                        <img src="static/image/2541979.png" alt="Ícone de DEE" style="width: 24px; height: 24px; margin-right: 8px;">
+                        GABINETE 
+                    </h3>
+                    <p>Todos abastecimentos realizados em Março</p>
+                    <div style="overflow-x: auto; max-width: 100%;">
+                        <table border="1" style="width: 100%; min-width: 600px;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>RGF</th>
+                                <th>KM</th>
+                                <th>Placa</th>
+                                <th>Data</th>
+                                <th>Posto</th>
+                                <th>Comprovante</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaGABINETE">
+                            <!-- Os dados serão preenchidos dinamicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+                
+                <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    fetch("/abastecimentoGabineteHist")
+                        .then(response => response.json())
+                        .then(data => {
+                            const tabela = document.getElementById("tabelaGABINETE");
+                            data.forEach(abastecimento => {
+                                const row = `<tr>
+                                    <td>${abastecimento.id}</td>
+                                    <td>${abastecimento.nome}</td>
+                                    <td>${abastecimento.rgf}</td>
+                                    <td>${abastecimento.km}</td>
+                                    <td>${abastecimento.placa}</td>
+                                    <td>${abastecimento.data}</td>
+                                    <td>${abastecimento.posto}</td>
+                                    <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                                </tr>`;
+                                tabela.innerHTML += row;
+                            });
+                        })
+                        .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+                });
+                </script>
+    
+
+
+
+
+
+
+
+
+
+            <!-- I N F O R M A T I C A -->
+
+            <!--INFORMATICA AUTORIZACAO-->
+            <div id="informaticaAut" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/78951.png" alt="Ícone de informatica" style="width: 24px; height: 24px; margin-right: 8px;">
+                    INFORMÁTICA
+                </h3>                        
+                <p>Preencha após realizar o abastecimento</p>
+                <form class="mt-3" action="/abastecimentoInformaticaAut" method="POST" enctype="multipart/form-data"> 
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rgf" class="form-label">RGF:</label>
+                        <input type="text" class="form-control" id="rgf" name="rgf" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="km" class="form-label">KM:</label>
+                        <input type="number" class="form-control" id="km" name="km" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="placa" class="form-label">Placa:</label>
+                        <input type="text" class="form-control" id="placa" name="placa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data:</label>
+                        <input type="date" class="form-control" id="data" name="data" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="posto" class="form-label">Posto:</label>
+                        <input type="text" class="form-control" id="posto" name="posto" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comprovante" class="form-label">Comprovante (PNG):</label>
+                        <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+    </div>
+
+            <!--INFORMATICA HISTORICO-->
+            <div id="informaticaHist" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/78951.png" alt="Ícone de DEE" style="width: 24px; height: 24px; margin-right: 8px;">
+                    INFORMÁTICA 
+                </h3>
+                <p>Todos abastecimentos realizados em Março</p>
+                <div style="overflow-x: auto; max-width: 100%;">
+                    <table border="1" style="width: 100%; min-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>RGF</th>
+                            <th>KM</th>
+                            <th>Placa</th>
+                            <th>Data</th>
+                            <th>Posto</th>
+                            <th>Comprovante</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaINFORMATICA">
+                        <!-- Os dados serão preenchidos dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch("/abastecimentoInformaticaHist")
+                    .then(response => response.json())
+                    .then(data => {
+                        const tabela = document.getElementById("tabelaINFORMATICA");
+                        data.forEach(abastecimento => {
+                            const row = `<tr>
+                                <td>${abastecimento.id}</td>
+                                <td>${abastecimento.nome}</td>
+                                <td>${abastecimento.rgf}</td>
+                                <td>${abastecimento.km}</td>
+                                <td>${abastecimento.placa}</td>
+                                <td>${abastecimento.data}</td>
+                                <td>${abastecimento.posto}</td>
+                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                            </tr>`;
+                            tabela.innerHTML += row;
+                        });
+                    })
+                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+            });
+            </script>
+
+
+
+
+
+
+
+
+
+            <!-- L O G I S T I C A -->
+
+            <!--LOGISTICA AUTORIZACAO-->
+            <div id="logisticaAut" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/4394181.png" alt="Ícone de logistica" style="width: 24px; height: 24px; margin-right: 8px;">
+                    LOGÍSTICA
+                </h3>                        
+                <p>Preencha após realizar o abastecimento</p>
+                <form class="mt-3" action="/abastecimentoLogisticaAut" method="POST" enctype="multipart/form-data"> 
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rgf" class="form-label">RGF:</label>
+                        <input type="text" class="form-control" id="rgf" name="rgf" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="km" class="form-label">KM:</label>
+                        <input type="number" class="form-control" id="km" name="km" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="placa" class="form-label">Placa:</label>
+                        <input type="text" class="form-control" id="placa" name="placa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data:</label>
+                        <input type="date" class="form-control" id="data" name="data" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="posto" class="form-label">Posto:</label>
+                        <input type="text" class="form-control" id="posto" name="posto" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comprovante" class="form-label">Comprovante (PNG):</label>
+                        <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+    </div>
+
+            <!--LOGISTICA HISTORICO-->
+            <div id="logisticaHist" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/4394181.png" alt="Ícone de DEE" style="width: 24px; height: 24px; margin-right: 8px;">
+                    LOGÍSTICA 
+                </h3>
+                <p>Todos abastecimentos realizados em Março</p>
+                <div style="overflow-x: auto; max-width: 100%;">
+                    <table border="1" style="width: 100%; min-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>RGF</th>
+                            <th>KM</th>
+                            <th>Placa</th>
+                            <th>Data</th>
+                            <th>Posto</th>
+                            <th>Comprovante</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaLOGÍSTICA">
+                        <!-- Os dados serão preenchidos dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch("/abastecimentoLogisticaHist")
+                    .then(response => response.json())
+                    .then(data => {
+                        const tabela = document.getElementById("tabelaLOGÍSTICA");
+                        data.forEach(abastecimento => {
+                            const row = `<tr>
+                                <td>${abastecimento.id}</td>
+                                <td>${abastecimento.nome}</td>
+                                <td>${abastecimento.rgf}</td>
+                                <td>${abastecimento.km}</td>
+                                <td>${abastecimento.placa}</td>
+                                <td>${abastecimento.data}</td>
+                                <td>${abastecimento.posto}</td>
+                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                            </tr>`;
+                            tabela.innerHTML += row;
+                        });
+                    })
+                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+            });
+            </script>
+
+
+
+
+
+
+
+
+
+
+            <!-- N Ú C L E O-->
+
+            <!--NUCLEO AUTORIZACAO-->
+            <div id="nucleoAut" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/29302.png" alt="Ícone de nucleo" style="width: 24px; height: 24px; margin-right: 8px;">
+                    NÚCLEO PEDAGÓGICO
+                </h3>                        
+                <p>Preencha após realizar o abastecimento</p>
+                <form class="mt-3" action="/abastecimentoNucleoAut" method="POST" enctype="multipart/form-data"> 
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rgf" class="form-label">RGF:</label>
+                        <input type="text" class="form-control" id="rgf" name="rgf" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="km" class="form-label">KM:</label>
+                        <input type="number" class="form-control" id="km" name="km" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="placa" class="form-label">Placa:</label>
+                        <input type="text" class="form-control" id="placa" name="placa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data:</label>
+                        <input type="date" class="form-control" id="data" name="data" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="posto" class="form-label">Posto:</label>
+                        <input type="text" class="form-control" id="posto" name="posto" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comprovante" class="form-label">Comprovante (PNG):</label>
+                        <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+    </div>
+
+            <!--NUCLEO HISTORICO-->
+            <div id="nucleoHist" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/29302.png" alt="Ícone de nucleo" style="width: 24px; height: 24px; margin-right: 8px;">
+                    NÚCLEO 
+                </h3>
+                <p>Todos abastecimentos realizados em Março</p>
+                <div style="overflow-x: auto; max-width: 100%;">
+                    <table border="1" style="width: 100%; min-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>RGF</th>
+                            <th>KM</th>
+                            <th>Placa</th>
+                            <th>Data</th>
+                            <th>Posto</th>
+                            <th>Comprovante</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaNucleo">
+                        <!-- Os dados serão preenchidos dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch("/abastecimentoNucleoHist")
+                    .then(response => response.json())
+                    .then(data => {
+                        const tabela = document.getElementById("tabelaNucleo");
+                        data.forEach(abastecimento => {
+                            const row = `<tr>
+                                <td>${abastecimento.id}</td>
+                                <td>${abastecimento.nome}</td>
+                                <td>${abastecimento.rgf}</td>
+                                <td>${abastecimento.km}</td>
+                                <td>${abastecimento.placa}</td>
+                                <td>${abastecimento.data}</td>
+                                <td>${abastecimento.posto}</td>
+                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                            </tr>`;
+                            tabela.innerHTML += row;
+                        });
+                    })
+                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+            });
+            </script>
+
+            
+      
+        
+
+
+
+
+
+            <!-- N U T R I C A O-->
+
+            <!--NUTRIÇÃO AUTORIZACAO-->
+            <div id="nutricaoAut" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/649371.png" alt="Ícone de nutricao" style="width: 24px; height: 24px; margin-right: 8px;">
+                    NUTRIÇÃO
+                </h3>                        
+                <p>Preencha após realizar o abastecimento</p>
+                <form class="mt-3" action="/abastecimentoNutricaoAut" method="POST" enctype="multipart/form-data"> 
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rgf" class="form-label">RGF:</label>
+                        <input type="text" class="form-control" id="rgf" name="rgf" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="km" class="form-label">KM:</label>
+                        <input type="number" class="form-control" id="km" name="km" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="placa" class="form-label">Placa:</label>
+                        <input type="text" class="form-control" id="placa" name="placa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data:</label>
+                        <input type="date" class="form-control" id="data" name="data" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="posto" class="form-label">Posto:</label>
+                        <input type="text" class="form-control" id="posto" name="posto" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comprovante" class="form-label">Comprovante (PNG):</label>
+                        <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+    </div>
+
+            <!--NUTRIÇÃO HISTORICO-->
+            <div id="nutricaoHist" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/649371.png" alt="Ícone de NUTRIÇÃO" style="width: 24px; height: 24px; margin-right: 8px;">
+                    NUTRIÇÃO
+                </h3>
+                <p>Todos abastecimentos realizados em Março</p>
+                <div style="overflow-x: auto; max-width: 100%;">
+                    <table border="1" style="width: 100%; min-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>RGF</th>
+                            <th>KM</th>
+                            <th>Placa</th>
+                            <th>Data</th>
+                            <th>Posto</th>
+                            <th>Comprovante</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaNutricao">
+                        <!-- Os dados serão preenchidos dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch("/abastecimentoNutricaoHist")
+                    .then(response => response.json())
+                    .then(data => {
+                        const tabela = document.getElementById("tabelaNutricao");
+                        data.forEach(abastecimento => {
+                            const row = `<tr>
+                                <td>${abastecimento.id}</td>
+                                <td>${abastecimento.nome}</td>
+                                <td>${abastecimento.rgf}</td>
+                                <td>${abastecimento.km}</td>
+                                <td>${abastecimento.placa}</td>
+                                <td>${abastecimento.data}</td>
+                                <td>${abastecimento.posto}</td>
+                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                            </tr>`;
+                            tabela.innerHTML += row;
+                        });
+                    })
+                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+            });
+            </script>
+
+
+
+
+
+
+
+
+    <!-- S U P E R V I S A O -->
+
+            <!--SUPERVISAO AUTORIZACAO-->
+            <div id="supervisaoAut" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/65000.png" alt="Ícone de supervisao" style="width: 24px; height: 24px; margin-right: 8px;">
+                    SUPERVISÃO
+                </h3>                        
+                <p>Preencha após realizar o abastecimento</p>
+                <form class="mt-3" action="/abastecimentoSupervisaoAut" method="POST" enctype="multipart/form-data"> 
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rgf" class="form-label">RGF:</label>
+                        <input type="text" class="form-control" id="rgf" name="rgf" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="km" class="form-label">KM:</label>
+                        <input type="number" class="form-control" id="km" name="km" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="placa" class="form-label">Placa:</label>
+                        <input type="text" class="form-control" id="placa" name="placa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data:</label>
+                        <input type="date" class="form-control" id="data" name="data" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="posto" class="form-label">Posto:</label>
+                        <input type="text" class="form-control" id="posto" name="posto" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comprovante" class="form-label">Comprovante (PNG):</label>
+                        <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+    </div>
+
+            <!--SUPERVISAO HISTORICO-->
+            <div id="supervisaoHist" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/65000.png" alt="Ícone de SUPERVISAO" style="width: 24px; height: 24px; margin-right: 8px;">
+                    SUPERVISÃO
+                </h3>
+                <p>Todos abastecimentos realizados em Março</p>
+                <div style="overflow-x: auto; max-width: 100%;">
+                    <table border="1" style="width: 100%; min-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>RGF</th>
+                            <th>KM</th>
+                            <th>Placa</th>
+                            <th>Data</th>
+                            <th>Posto</th>
+                            <th>Comprovante</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaSupervisao">
+                        <!-- Os dados serão preenchidos dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+            
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch("/abastecimentoSupervisaoHist")
+                    .then(response => response.json())
+                    .then(data => {
+                        const tabela = document.getElementById("tabelaSupervisao");
+                        data.forEach(abastecimento => {
+                            const row = `<tr>
+                                <td>${abastecimento.id}</td>
+                                <td>${abastecimento.nome}</td>
+                                <td>${abastecimento.rgf}</td>
+                                <td>${abastecimento.km}</td>
+                                <td>${abastecimento.placa}</td>
+                                <td>${abastecimento.data}</td>
+                                <td>${abastecimento.posto}</td>
+                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                            </tr>`;
+                            tabela.innerHTML += row;
+                        });
+                    })
+                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+            });
+            </script>
+
+
+
+
+
+
+
+
+
+    <!-- V I G I L A N C I A  -->
+
+            <!--VIGILANCIA AUTORIZACAO-->
+            <div id="vigilanciaAut" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/139787.png" alt="Ícone de vigilancia" style="width: 24px; height: 24px; margin-right: 8px;">
+                    VIGILÂNCIA
+                </h3>                        
+                <p>Preencha após realizar o abastecimento</p>
+                <form class="mt-3" action="/abastecimentoVigilanciaAut" method="POST" enctype="multipart/form-data"> 
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rgf" class="form-label">RGF:</label>
+                        <input type="text" class="form-control" id="rgf" name="rgf" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="km" class="form-label">KM:</label>
+                        <input type="number" class="form-control" id="km" name="km" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="placa" class="form-label">Placa:</label>
+                        <input type="text" class="form-control" id="placa" name="placa" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data:</label>
+                        <input type="date" class="form-control" id="data" name="data" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="posto" class="form-label">Posto:</label>
+                        <input type="text" class="form-control" id="posto" name="posto" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comprovante" class="form-label">Comprovante (PNG):</label>
+                        <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+    </div>
+
+            <!--VIGILANCIA HISTORICO-->
+            <div id="vigilanciaHist" class="tab-pane fade">
+                <h3>
+                    <img src="static/image/139787.png" alt="Ícone de VIGILANCIA" style="width: 24px; height: 24px; margin-right: 8px;">
+                    VIGILÂNCIA
+                </h3>
+                <p>Todos abastecimentos realizados em Março</p>
+                <div style="overflow-x: auto; max-width: 100%;">
+                    <table border="1" style="width: 100%; min-width: 600px;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>RGF</th>
+                            <th>KM</th>
+                            <th>Placa</th>
+                            <th>Data</th>
+                            <th>Posto</th>
+                            <th>Comprovante</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaVigilancia">
+                        <!-- Os dados serão preenchidos dinamicamente -->
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch("/abastecimentoVigilanciaHist")
+                    .then(response => response.json())
+                    .then(data => {
+                        const tabela = document.getElementById("tabelaVigilancia");
+                        data.forEach(abastecimento => {
+                            const row = `<tr>
+                                <td>${abastecimento.id}</td>
+                                <td>${abastecimento.nome}</td>
+                                <td>${abastecimento.rgf}</td>
+                                <td>${abastecimento.km}</td>
+                                <td>${abastecimento.placa}</td>
+                                <td>${abastecimento.data}</td>
+                                <td>${abastecimento.posto}</td>
+                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                            </tr>`;
+                            tabela.innerHTML += row;
+                        });
+                    })
+                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+            });
+            </script>
+
+
+
+
+
+
+            </div>   
+</div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.tab-link').forEach(link => {
+    link.addEventListener('click', function () {
+        let tabId = this.getAttribute('data-tab');
+
+        document.querySelectorAll('.tab-pane').forEach(tab => {
+            tab.classList.remove('show', 'active');
+        });
+
+        document.getElementById(tabId).classList.add('show', 'active');
+    });
+});
+
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/script.js"></script>
+</body>
+</html>
+
