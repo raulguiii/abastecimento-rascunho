@@ -90,6 +90,8 @@ def registrar_abastecimentoAlmox():
     placa = request.form["placa"]
     data = request.form["data"]
     posto = request.form["posto"]
+    valor = request.form["valor"]
+    litros = request.form["litros"]
 
     if "comprovante" not in request.files:
         return "Erro: Nenhum arquivo enviado."
@@ -105,9 +107,10 @@ def registrar_abastecimentoAlmox():
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO abastecimentoAlmox (nome, rgf, km, placa, data, posto, comprovante)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
-    """, (nome, rgf, km, placa, data, posto, caminho_comprovante))
+        INSERT INTO abastecimentoAlmox 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
 
     conn.commit()
     cursor.close()
@@ -120,11 +123,12 @@ def listar_abastecimentosAlmox():
     if "usuario" not in session:
         return redirect(url_for("login"))
 
-    # Alteração para filtrar registros apenas de março (mês 3)
     query = """
-        SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
+        SELECT id, nome, rgf, km, placa, 
+               DATE_FORMAT(data, '%d/%m/%Y') AS data, 
+               posto, comprovante, valor, litros
         FROM abastecimentoAlmox 
-        WHERE MONTH(data) = 4
+        WHERE MONTH(data) = 5
     """
     abastecimentos = executar_consulta(query, fetch=True)
 

@@ -1,7 +1,7 @@
 banco: 
 
-CREATE DATABASE db_abastecimento_semecti; 
-USE db_abastecimento_semecti;
+CREATE DATABASE db_semecti_abastecimento; 
+USE db_semecti_abastecimento;
 
 -- Tabela Usuários
 -- Para criar usuario o departamento deve ser informado dessa forma 'Admin','Almoxarifado','Comunicação', 'DEE', 'Casa_de_Projetos', 'Engenharia_Manutenção', 'Engenharia_Projetos', 'Gabinete','Logística', 'Informática', 'Núcleo', 'Nutrição', 'Supervisão', 'Vigilância'
@@ -15,18 +15,18 @@ CREATE TABLE usuarios (
 	departamento VARCHAR(100) NOT NULL, 
 	rgf VARCHAR(50) UNIQUE NOT NULL 
 );
-INSERT INTO usuarios (nome_completo, senha, cargo, departamento, rgf) VALUES ('Joel', 'Joel10', 'Chefe de Departamento', 'Engenharia_Manutenção', '85410');
+INSERT INTO usuarios (nome_completo, senha, cargo, departamento, rgf) VALUES ('Valter', '2005', 'Admin', 'Admin', '2000');
 
 UPDATE usuarios 
 SET 
-    nome_completo = 'Jessica Freitas', 
-    senha = 'JessicaFreitas10', 
-    cargo = 'Chefe de Departamento', 
-    departamento = 'Gabinete', 
-    rgf = '87410' 
-WHERE id = 3;
+    nome_completo = 'Raul Guilherme', 
+    senha = 'RaulGuilherme123', 
+    cargo = 'Dev', 
+    departamento = 'Admin', 
+    rgf = '1979' 
+WHERE id = 5;
 
-
+	
 -- Tabela Almoxarifado
 Select * from abastecimentoAlmox;
 CREATE TABLE abastecimentoAlmox ( 
@@ -38,8 +38,15 @@ CREATE TABLE abastecimentoAlmox (
     data DATE NOT NULL, 
     posto VARCHAR(255) NOT NULL, 
     comprovante VARCHAR(255) NOT NULL, 
+    valor DECIMAL(10,2) NOT NULL,
+    litros DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (rgf) REFERENCES usuarios(rgf) 
 );
+ALTER TABLE abastecimentoAlmox
+ADD COLUMN valor DECIMAL(10,2) NOT NULL,
+ADD COLUMN litros DECIMAL(10,2) NOT NULL;
+
+
 
 
 -- Tabela Casa de Projetos
@@ -72,7 +79,7 @@ CREATE TABLE abastecimentoComunicacao (
 );
 
 
--- Tabela DEE
+-- Tabela Comunicação
 Select * from abastecimentoDEE;
 CREATE TABLE abastecimentoDEE ( 
 	id INT AUTO_INCREMENT PRIMARY KEY, 
@@ -222,5 +229,5 @@ CREATE TABLE abastecimentoVigilancia (
 );
 
 
-
+show tables
 
