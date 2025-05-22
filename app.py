@@ -150,6 +150,9 @@ def registrar_abastecimentoCasaDeProjetos():
     placa = request.form["placa"]
     data = request.form["data"]
     posto = request.form["posto"]
+    litros = request.form["litros"]
+    valor = request.form["valor"]
+
 
     if "comprovante" not in request.files:
         return "Erro: Nenhum arquivo enviado."
@@ -165,9 +168,11 @@ def registrar_abastecimentoCasaDeProjetos():
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO abastecimentoCasaDeProjetos (nome, rgf, km, placa, data, posto, comprovante)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
-    """, (nome, rgf, km, placa, data, posto, caminho_comprovante))
+        INSERT INTO abastecimentoCasaDeProjetos 
+        (nome, rgf, km, placa, data, posto, litros, valor, comprovante)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, litros, valor, caminho_comprovante))
+
 
     conn.commit()
     cursor.close()
@@ -181,9 +186,10 @@ def listar_abastecimentosCasaDeProjetos():
         return redirect(url_for("login"))
 
     query = """
-        SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
+        SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, 
+            posto, litros, valor, comprovante 
         FROM abastecimentoCasaDeProjetos 
-        WHERE MONTH(data) = 4
+        WHERE MONTH(data) = 5
     """
     abastecimentos = executar_consulta(query, fetch=True)
 
