@@ -458,7 +458,11 @@ document.addEventListener("DOMContentLoaded", function() {
                             <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
-                    </form>                     
+                    </form>  
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>                   
     </div>
 
             <!--CASA DE PROJETOS HISTORICO-->    
@@ -580,7 +584,11 @@ document.addEventListener("DOMContentLoaded", function() {
                             <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
-                    </form>                     
+                    </form>   
+                    <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>                    
     </div>
 
             <!--COMUNICACAO HISTORICO-->    
@@ -703,7 +711,11 @@ document.addEventListener("DOMContentLoaded", function() {
                             <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Enviar</button>
-                    </form>                     
+                    </form>   
+                    <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>                    
     </div>
 
             <!--DEE HISTORICO-->    
@@ -813,11 +825,23 @@ document.addEventListener("DOMContentLoaded", function() {
                         <input type="text" class="form-control" id="posto" name="posto" required>
                     </div>
                     <div class="mb-3">
+                        <label for="litros" class="form-label">Quantidade de Litros:</label>
+                        <input type="number" step="0.01" class="form-control" id="litros" name="litros" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="valor" class="form-label">Valor Total (R$):</label>
+                        <input type="number" step="0.01" class="form-control" id="valor" name="valor" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="comprovante" class="form-label">Comprovante (PNG):</label>
                         <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
+                <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>  
     </div>
 
             <!--ENGENHARIA MANUTENÇÃO HISTORICO-->
@@ -838,6 +862,9 @@ document.addEventListener("DOMContentLoaded", function() {
                             <th>Placa</th>
                             <th>Data</th>
                             <th>Posto</th>
+                            <th>Litros</th>
+                            <th>Valor Total (R$)</th>
+                            <th>Valor por Litro (R$)</th>
                             <th>Comprovante</th>
                         </tr>
                     </thead>
@@ -854,7 +881,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     .then(response => response.json())
                     .then(data => {
                         const tabela = document.getElementById("tabelaAbastecimentosEng1");
+                        tabela.innerHTML = ""; // Limpa a tabela
+
                         data.forEach(abastecimento => {
+                            const litros = parseFloat(abastecimento.litros);
+                            const valor = parseFloat(abastecimento.valor);
+                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
+
                             const row = `<tr>
                                 <td>${abastecimento.id}</td>
                                 <td>${abastecimento.nome}</td>
@@ -863,6 +896,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <td>${abastecimento.placa}</td>
                                 <td>${abastecimento.data}</td>
                                 <td>${abastecimento.posto}</td>
+                                <td>${litros.toFixed(2)} L</td>
+                                <td>R$ ${valor.toFixed(2)}</td>
+                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
                                 <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
                             </tr>`;
                             tabela.innerHTML += row;
@@ -915,11 +951,23 @@ document.addEventListener("DOMContentLoaded", function() {
                         <input type="text" class="form-control" id="posto" name="posto" required>
                     </div>
                     <div class="mb-3">
+                        <label for="litros" class="form-label">Quantidade de Litros:</label>
+                        <input type="number" step="0.01" class="form-control" id="litros" name="litros" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="valor" class="form-label">Valor Total (R$):</label>
+                        <input type="number" step="0.01" class="form-control" id="valor" name="valor" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="comprovante" class="form-label">Comprovante (PNG):</label>
                         <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
+                <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>  
     </div>
 
             <!--ENGENHARIA PROJETOS HISTORICO-->
@@ -940,6 +988,9 @@ document.addEventListener("DOMContentLoaded", function() {
                             <th>Placa</th>
                             <th>Data</th>
                             <th>Posto</th>
+                            <th>Litros</th>
+                            <th>Valor Total (R$)</th>
+                            <th>Valor por Litro (R$)</th>
                             <th>Comprovante</th>
                         </tr>
                     </thead>
@@ -956,7 +1007,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     .then(response => response.json())
                     .then(data => {
                         const tabela = document.getElementById("tabelaAbastecimentosEng2");
+                        tabela.innerHTML = ""; // Limpa antes de preencher
+
                         data.forEach(abastecimento => {
+                            const litros = parseFloat(abastecimento.litros);
+                            const valor = parseFloat(abastecimento.valor);
+                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
+
                             const row = `<tr>
                                 <td>${abastecimento.id}</td>
                                 <td>${abastecimento.nome}</td>
@@ -965,6 +1022,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <td>${abastecimento.placa}</td>
                                 <td>${abastecimento.data}</td>
                                 <td>${abastecimento.posto}</td>
+                                <td>${litros.toFixed(2)} L</td>
+                                <td>R$ ${valor.toFixed(2)}</td>
+                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
                                 <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
                             </tr>`;
                             tabela.innerHTML += row;
@@ -1017,11 +1077,23 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <input type="text" class="form-control" id="posto" name="posto" required>
                             </div>
                             <div class="mb-3">
+                                <label for="litros" class="form-label">Quantidade de Litros:</label>
+                                <input type="number" step="0.01" class="form-control" id="litros" name="litros" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="valor" class="form-label">Valor Total (R$):</label>
+                                <input type="number" step="0.01" class="form-control" id="valor" name="valor" required>
+                            </div>
+                            <div class="mb-3">
                                 <label for="comprovante" class="form-label">Comprovante (PNG):</label>
                                 <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Enviar</button>
-                        </form>                     
+                        </form>       
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>                
         </div>
     
                 <!--GABINETE HISTORICO-->    
@@ -1034,17 +1106,20 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div style="overflow-x: auto; max-width: 100%;">
                         <table border="1" style="width: 100%; min-width: 600px;">
                         <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nome</th>
-                                <th>RGF</th>
-                                <th>KM</th>
-                                <th>Placa</th>
-                                <th>Data</th>
-                                <th>Posto</th>
-                                <th>Comprovante</th>
-                            </tr>
-                        </thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>RGF</th>
+                            <th>KM</th>
+                            <th>Placa</th>
+                            <th>Data</th>
+                            <th>Posto</th>
+                            <th>Litros</th>
+                            <th>Valor Total (R$)</th>
+                            <th>Valor por Litro (R$)</th>
+                            <th>Comprovante</th>
+                        </tr>
+                    </thead>
                         <tbody id="tabelaGABINETE">
                             <!-- Os dados serão preenchidos dinamicamente -->
                         </tbody>
@@ -1058,7 +1133,13 @@ document.addEventListener("DOMContentLoaded", function() {
                         .then(response => response.json())
                         .then(data => {
                             const tabela = document.getElementById("tabelaGABINETE");
+                            tabela.innerHTML = ""; // limpa antes de preencher
+
                             data.forEach(abastecimento => {
+                                const litros = parseFloat(abastecimento.litros);
+                                const valor = parseFloat(abastecimento.valor);
+                                const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
+
                                 const row = `<tr>
                                     <td>${abastecimento.id}</td>
                                     <td>${abastecimento.nome}</td>
@@ -1067,6 +1148,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                     <td>${abastecimento.placa}</td>
                                     <td>${abastecimento.data}</td>
                                     <td>${abastecimento.posto}</td>
+                                    <td>${litros.toFixed(2)} L</td>
+                                    <td>R$ ${valor.toFixed(2)}</td>
+                                    <td>R$ ${valorPorLitro.toFixed(2)}</td>
                                     <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
                                 </tr>`;
                                 tabela.innerHTML += row;
@@ -1120,11 +1204,23 @@ document.addEventListener("DOMContentLoaded", function() {
                         <input type="text" class="form-control" id="posto" name="posto" required>
                     </div>
                     <div class="mb-3">
+                        <label for="litros" class="form-label">Quantidade de Litros:</label>
+                        <input type="number" step="0.01" class="form-control" id="litros" name="litros" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="valor" class="form-label">Valor Total (R$):</label>
+                        <input type="number" step="0.01" class="form-control" id="valor" name="valor" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="comprovante" class="form-label">Comprovante (PNG):</label>
                         <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
+                <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>  
     </div>
 
             <!--INFORMATICA HISTORICO-->
@@ -1145,6 +1241,9 @@ document.addEventListener("DOMContentLoaded", function() {
                             <th>Placa</th>
                             <th>Data</th>
                             <th>Posto</th>
+                            <th>Litros</th>
+                            <th>Valor Total (R$)</th>
+                            <th>Valor por Litro (R$)</th>
                             <th>Comprovante</th>
                         </tr>
                     </thead>
@@ -1156,12 +1255,18 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
             
             <script>
-            document.addEventListener("DOMContentLoaded", function() {
+            document.addEventListener("DOMContentLoaded", function () {
                 fetch("/abastecimentoInformaticaHist")
                     .then(response => response.json())
                     .then(data => {
                         const tabela = document.getElementById("tabelaINFORMATICA");
+                        tabela.innerHTML = ""; // Limpa antes de preencher
+
                         data.forEach(abastecimento => {
+                            const litros = parseFloat(abastecimento.litros);
+                            const valor = parseFloat(abastecimento.valor);
+                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
+
                             const row = `<tr>
                                 <td>${abastecimento.id}</td>
                                 <td>${abastecimento.nome}</td>
@@ -1170,6 +1275,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <td>${abastecimento.placa}</td>
                                 <td>${abastecimento.data}</td>
                                 <td>${abastecimento.posto}</td>
+                                <td>${litros.toFixed(2)} L</td>
+                                <td>R$ ${valor.toFixed(2)}</td>
+                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
                                 <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
                             </tr>`;
                             tabela.innerHTML += row;
@@ -1222,11 +1330,23 @@ document.addEventListener("DOMContentLoaded", function() {
                         <input type="text" class="form-control" id="posto" name="posto" required>
                     </div>
                     <div class="mb-3">
+                        <label for="litros" class="form-label">Quantidade de Litros:</label>
+                        <input type="number" step="0.01" class="form-control" id="litros" name="litros" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="valor" class="form-label">Valor Total (R$):</label>
+                        <input type="number" step="0.01" class="form-control" id="valor" name="valor" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="comprovante" class="form-label">Comprovante (PNG):</label>
                         <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
+                <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>  
     </div>
 
             <!--LOGISTICA HISTORICO-->
@@ -1247,6 +1367,9 @@ document.addEventListener("DOMContentLoaded", function() {
                             <th>Placa</th>
                             <th>Data</th>
                             <th>Posto</th>
+                            <th>Litros</th>
+                            <th>Valor Total (R$)</th>
+                            <th>Valor por Litro (R$)</th>
                             <th>Comprovante</th>
                         </tr>
                     </thead>
@@ -1263,7 +1386,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     .then(response => response.json())
                     .then(data => {
                         const tabela = document.getElementById("tabelaLOGÍSTICA");
+                        tabela.innerHTML = ""; // Limpa a tabela antes de preencher
+
                         data.forEach(abastecimento => {
+                            const litros = parseFloat(abastecimento.litros);
+                            const valor = parseFloat(abastecimento.valor);
+                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
+
                             const row = `<tr>
                                 <td>${abastecimento.id}</td>
                                 <td>${abastecimento.nome}</td>
@@ -1272,6 +1401,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <td>${abastecimento.placa}</td>
                                 <td>${abastecimento.data}</td>
                                 <td>${abastecimento.posto}</td>
+                                <td>${litros.toFixed(2)} L</td>
+                                <td>R$ ${valor.toFixed(2)}</td>
+                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
                                 <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
                             </tr>`;
                             tabela.innerHTML += row;
@@ -1325,11 +1457,23 @@ document.addEventListener("DOMContentLoaded", function() {
                         <input type="text" class="form-control" id="posto" name="posto" required>
                     </div>
                     <div class="mb-3">
+                        <label for="litros" class="form-label">Litros Abastecidos:</label>
+                        <input type="number" step="0.01" class="form-control" id="litros" name="litros" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="valor" class="form-label">Valor Total (R$):</label>
+                        <input type="number" step="0.01" class="form-control" id="valor" name="valor" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="comprovante" class="form-label">Comprovante (PNG):</label>
                         <input type="file" class="form-control" id="comprovante" name="comprovante" accept="static/image/png" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
+                <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>
+                        <h1>ㅤㅤㅤ</h1>  
     </div>
 
             <!--NUCLEO HISTORICO-->
@@ -1350,6 +1494,9 @@ document.addEventListener("DOMContentLoaded", function() {
                             <th>Placa</th>
                             <th>Data</th>
                             <th>Posto</th>
+                            <th>Litros</th>
+                            <th>Valor Total (R$)</th>
+                            <th>Valor por Litro (R$)</th>
                             <th>Comprovante</th>
                         </tr>
                     </thead>
@@ -1366,7 +1513,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     .then(response => response.json())
                     .then(data => {
                         const tabela = document.getElementById("tabelaNucleo");
+                        tabela.innerHTML = ""; // Limpa antes de preencher
+
                         data.forEach(abastecimento => {
+                            const litros = parseFloat(abastecimento.litros);
+                            const valor = parseFloat(abastecimento.valor);
+                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
+
                             const row = `<tr>
                                 <td>${abastecimento.id}</td>
                                 <td>${abastecimento.nome}</td>
@@ -1375,6 +1528,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 <td>${abastecimento.placa}</td>
                                 <td>${abastecimento.data}</td>
                                 <td>${abastecimento.posto}</td>
+                                <td>${litros.toFixed(2)} L</td>
+                                <td>R$ ${valor.toFixed(2)}</td>
+                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
                                 <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
                             </tr>`;
                             tabela.innerHTML += row;
