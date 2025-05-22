@@ -291,9 +291,69 @@
                     <!-- A B A S T E C I M E N T O      G E R A L  -->
 
                     <div id="abastecimentoGeral" class="tab-pane fade show active">
-                                    <h3>Geral</h3>
-                        
+                    <h3>
+                        <img src="static/image/visao-geral.png" alt="" style="width: 24px; height: 24px; margin-right: 8px;">
+                        ABASTECIMENTO GERAL
+                    </h3> 
+                    <p>Todos abastecimentos realizados em Março</p>
+                    <div style="overflow-x: auto; max-width: 100%;">
+                        <table border="1" style="width: 100%; min-width: 700px;">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>RGF</th>
+                                    <th>KM</th>
+                                    <th>Placa</th>
+                                    <th>Data</th>
+                                    <th>Posto</th>
+                                    <th>Litros</th>
+                                    <th>Valor Total (R$)</th>
+                                    <th>Valor por Litro (R$)</th>
+                                    <th>Comprovante</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelaAbastecimentosGeral">
+                                <!-- Dados dinâmicos -->
+                            </tbody>
+                        </table>
                     </div>
+                </div>
+                <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    fetch("/abastecimentoGeralHist")
+                        .then(response => response.json())
+                        .then(data => {
+                            const tabela = document.getElementById("tabelaAbastecimentosGeral");
+                            tabela.innerHTML = ""; // Limpa antes de preencher
+
+                            data.forEach(abastecimento => {
+                                const litros = parseFloat(abastecimento.litros);
+                                const valor = parseFloat(abastecimento.valor);
+                                const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
+
+                                const row = `<tr>
+                                    <td>${abastecimento.id}</td>
+                                    <td>${abastecimento.nome}</td>
+                                    <td>${abastecimento.rgf}</td>
+                                    <td>${abastecimento.km}</td>
+                                    <td>${abastecimento.placa}</td>
+                                    <td>${abastecimento.data}</td>
+                                    <td>${abastecimento.posto}</td>
+                                    <td>${litros.toFixed(2)} L</td>
+                                    <td>R$ ${valor.toFixed(2)}</td>
+                                    <td>R$ ${valorPorLitro.toFixed(2)}</td>
+                                    <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
+                                </tr>`;
+
+                                tabela.innerHTML += row;
+                            });
+                        })
+                        .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+                });
+                </script>
+                        
+                    
                     
 
 

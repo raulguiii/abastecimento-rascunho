@@ -76,6 +76,25 @@ def logout():
     return redirect(url_for("login"))
 
 
+                    # A B A S T E C I M E N T O         G E R A L  #
+
+@app.route("/abastecimentoGeralHist", methods=["GET"])
+def listar_abastecimentosGeral():
+    if "usuario" not in session:
+        return redirect(url_for("login"))
+
+    query = """
+        SELECT id, nome, rgf, km, placa, 
+               DATE_FORMAT(data, '%d/%m/%Y') AS data, 
+               posto, comprovante, valor, litros
+        FROM abastecimentoGeral
+        WHERE MONTH(data) = 5
+    """
+    abastecimentos = executar_consulta(query, fetch=True)
+
+    return jsonify(abastecimentos)
+
+
 
                         # A L M O X A R I F A D O #
 
