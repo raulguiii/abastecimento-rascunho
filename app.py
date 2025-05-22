@@ -660,6 +660,8 @@ def registrar_abastecimentoNutricao():
     placa = request.form["placa"]
     data = request.form["data"]
     posto = request.form["posto"]
+    valor = request.form["valor"]
+    litros = request.form["litros"]
 
     if "comprovante" not in request.files:
         return "Erro: Nenhum arquivo enviado."
@@ -675,9 +677,9 @@ def registrar_abastecimentoNutricao():
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO abastecimentoNutricao (nome, rgf, km, placa, data, posto, comprovante)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
-    """, (nome, rgf, km, placa, data, posto, caminho_comprovante))
+        INSERT INTO abastecimentoNutricao (nome, rgf, km, placa, data, posto, valor, litros, comprovante)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, valor, litros, caminho_comprovante))
 
     conn.commit()
     cursor.close()
@@ -691,7 +693,7 @@ def listar_abastecimentosNutricao():
         return redirect(url_for("login"))
 
     query = """
-        SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
+        SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, litros, valor, comprovante 
         FROM abastecimentoNutricao 
         WHERE MONTH(data) = 5
     """
@@ -713,6 +715,8 @@ def registrar_abastecimentoSupervisao():
     placa = request.form["placa"]
     data = request.form["data"]
     posto = request.form["posto"]
+    litros = request.form["litros"]
+    valor = request.form["valor"]
 
     if "comprovante" not in request.files:
         return "Erro: Nenhum arquivo enviado."
@@ -728,9 +732,9 @@ def registrar_abastecimentoSupervisao():
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO abastecimentoSupervisao (nome, rgf, km, placa, data, posto, comprovante)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
-    """, (nome, rgf, km, placa, data, posto, caminho_comprovante))
+        INSERT INTO abastecimentoSupervisao (nome, rgf, km, placa, data, posto, litros, valor, comprovante)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, litros, valor, caminho_comprovante))
 
     conn.commit()
     cursor.close()
@@ -744,7 +748,8 @@ def listar_abastecimentosSupervisao():
         return redirect(url_for("login"))
 
     query = """
-        SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
+        SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, 
+               litros, valor, comprovante 
         FROM abastecimentoSupervisao 
         WHERE MONTH(data) = 5
     """
@@ -766,6 +771,8 @@ def registrar_abastecimentoVigilancia():
     placa = request.form["placa"]
     data = request.form["data"]
     posto = request.form["posto"]
+    litros = request.form["litros"]
+    valor = request.form["valor"]
 
     if "comprovante" not in request.files:
         return "Erro: Nenhum arquivo enviado."
@@ -781,9 +788,9 @@ def registrar_abastecimentoVigilancia():
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO abastecimentoVigilancia (nome, rgf, km, placa, data, posto, comprovante)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
-    """, (nome, rgf, km, placa, data, posto, caminho_comprovante))
+        INSERT INTO abastecimentoVigilancia (nome, rgf, km, placa, data, posto, litros, valor, comprovante)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, litros, valor, caminho_comprovante))
 
     conn.commit()
     cursor.close()
@@ -797,7 +804,7 @@ def listar_abastecimentosVigilancia():
         return redirect(url_for("login"))
 
     query = """
-        SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
+        SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, litros, valor, comprovante 
         FROM abastecimentoVigilancia 
         WHERE MONTH(data) = 5
     """
