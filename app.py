@@ -209,6 +209,8 @@ def registrar_abastecimentoComunicacao():
     placa = request.form["placa"]
     data = request.form["data"]
     posto = request.form["posto"]
+    litros = request.form["litros"]
+    valor = request.form["valor"]
 
     if "comprovante" not in request.files:
         return "Erro: Nenhum arquivo enviado."
@@ -224,9 +226,10 @@ def registrar_abastecimentoComunicacao():
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO abastecimentoComunicacao (nome, rgf, km, placa, data, posto, comprovante)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
-    """, (nome, rgf, km, placa, data, posto, caminho_comprovante))
+        INSERT INTO abastecimentoComunicacao 
+        (nome, rgf, km, placa, data, posto, comprovante, litros, valor)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, litros, valor))
 
     conn.commit()
     cursor.close()
@@ -240,9 +243,10 @@ def listar_abastecimentosComunicacao():
         return redirect(url_for("login"))
 
     query = """
-        SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
+        SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, 
+               posto, litros, valor, comprovante 
         FROM abastecimentoComunicacao 
-        WHERE MONTH(data) = 4
+        WHERE MONTH(data) = 5
     """
     abastecimentos = executar_consulta(query, fetch=True)
 
@@ -264,10 +268,12 @@ def registrar_abastecimentoDEE():
     placa = request.form["placa"]
     data = request.form["data"]
     posto = request.form["posto"]
+    litros = request.form["litros"]
+    valor = request.form["valor"]
 
     if "comprovante" not in request.files:
         return "Erro: Nenhum arquivo enviado."
-    
+
     file = request.files["comprovante"]
     if file.filename == "":
         return "Erro: Nome de arquivo inválido."
@@ -279,9 +285,9 @@ def registrar_abastecimentoDEE():
     cursor = conn.cursor()
 
     cursor.execute("""
-        INSERT INTO abastecimentoDEE (nome, rgf, km, placa, data, posto, comprovante)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
-    """, (nome, rgf, km, placa, data, posto, caminho_comprovante))
+        INSERT INTO abastecimentoDEE (nome, rgf, km, placa, data, posto, litros, valor, comprovante)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, litros, valor, caminho_comprovante))
 
     conn.commit()
     cursor.close()
@@ -289,18 +295,18 @@ def registrar_abastecimentoDEE():
 
     return redirect(url_for("index"))
 
+
 @app.route("/abastecimentoDEEHist", methods=["GET"])
 def listar_abastecimentosDEE():
     if "usuario" not in session:
         return redirect(url_for("login"))
 
     query = """
-        SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
+        SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, litros, valor, comprovante 
         FROM abastecimentoDEE 
-        WHERE MONTH(data) = 4
+        WHERE MONTH(data) = 5
     """
     abastecimentos = executar_consulta(query, fetch=True)
-
     return jsonify(abastecimentos)
 
 
@@ -351,7 +357,7 @@ def listar_abastecimentosEng1():
     query = """
         SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
         FROM abastecimentoEng1 
-        WHERE MONTH(data) = 4
+        WHERE MONTH(data) = 5
     """
     abastecimentos = executar_consulta(query, fetch=True)
 
@@ -405,7 +411,7 @@ def listar_abastecimentosEng2():
     query = """
         SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
         FROM abastecimentoEng2 
-        WHERE MONTH(data) = 4
+        WHERE MONTH(data) = 5
     """
     abastecimentos = executar_consulta(query, fetch=True)
 
@@ -459,7 +465,7 @@ def listar_abastecimentosGabinete():
     query = """
         SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
         FROM abastecimentoGabinete 
-        WHERE MONTH(data) = 4
+        WHERE MONTH(data) = 5
     """
     abastecimentos = executar_consulta(query, fetch=True)
 
@@ -512,7 +518,7 @@ def listar_abastecimentosInformatica():
     query = """
         SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
         FROM abastecimentoInformatica 
-        WHERE MONTH(data) = 4
+        WHERE MONTH(data) = 5
     """
     abastecimentos = executar_consulta(query, fetch=True)
 
@@ -566,7 +572,7 @@ def listar_abastecimentosLogistica():
     query = """
         SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
         FROM abastecimentoLogistica 
-        WHERE MONTH(data) = 4
+        WHERE MONTH(data) = 5
     """
     abastecimentos = executar_consulta(query, fetch=True)
 
@@ -618,7 +624,7 @@ def listar_abastecimentosNucleo():
     query = """
         SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
         FROM abastecimentoNucleo 
-        WHERE MONTH(data) = 4
+        WHERE MONTH(data) = 5
     """
     abastecimentos = executar_consulta(query, fetch=True)
 
@@ -671,7 +677,7 @@ def listar_abastecimentosNutricao():
     query = """
         SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
         FROM abastecimentoNutricao 
-        WHERE MONTH(data) = 4
+        WHERE MONTH(data) = 5
     """
     abastecimentos = executar_consulta(query, fetch=True)
 
@@ -724,7 +730,7 @@ def listar_abastecimentosSupervisao():
     query = """
         SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
         FROM abastecimentoSupervisao 
-        WHERE MONTH(data) = 4
+        WHERE MONTH(data) = 5
     """
     abastecimentos = executar_consulta(query, fetch=True)
 
@@ -777,7 +783,7 @@ def listar_abastecimentosVigilancia():
     query = """
         SELECT id, nome, rgf, km, placa, DATE_FORMAT(data, '%d/%m/%Y') AS data, posto, comprovante 
         FROM abastecimentoVigilancia 
-        WHERE MONTH(data) = 4
+        WHERE MONTH(data) = 5
     """
     abastecimentos = executar_consulta(query, fetch=True)
 
