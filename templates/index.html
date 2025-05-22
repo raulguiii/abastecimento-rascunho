@@ -299,9 +299,9 @@
 
                         <!-- Filtros -->
                         <div style="margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 16px;">
-                            <input type="text" id="filtroNome" placeholder="Filtrar por Nome" style="padding: 6px;">
-                            <input type="text" id="filtroPlaca" placeholder="Filtrar por Placa" style="padding: 6px;">
-                            <input type="number" id="filtroValor" placeholder="Filtrar por Valor Total" style="padding: 6px;">
+                            <input type="text" id="filtroNome" placeholder="Filtrar por Nome" style="padding: 10px; width: 400px;">
+                            <input type="text" id="filtroPlaca" placeholder="Filtrar por Placa" style="padding: 10px; width: 400px;">
+                            <input type="text" id="filtroValor" placeholder="Filtrar por Valor Total" style="padding: 10px; width: 400px;">
                         </div>
 
                         <div style="overflow-x: auto; max-width: 100%;">
@@ -336,13 +336,13 @@
                             const tabela = document.getElementById("tabelaAbastecimentosGeral");
                             tabela.innerHTML = "";
 
-                            dados.forEach(abastecimento => {
+                            dados.forEach((abastecimento, index) => {
                                 const litros = parseFloat(abastecimento.litros);
                                 const valor = parseFloat(abastecimento.valor);
                                 const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
 
                                 const row = `<tr>
-                                    <td>${abastecimento.id}</td>
+                                    <td>${index + 1}</td>
                                     <td>${abastecimento.nome}</td>
                                     <td>${abastecimento.rgf}</td>
                                     <td>${abastecimento.km}</td>
