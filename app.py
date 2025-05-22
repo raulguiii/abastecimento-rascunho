@@ -55,16 +55,16 @@ def index():
 
 @app.route("/login", methods=["POST"])
 def do_login():
-    nome_completo = request.form["nome_completo"]
+    rgf = request.form["rgf"]
     senha = request.form["senha"]
 
-    query = "SELECT * FROM usuarios WHERE nome_completo = %s AND senha = %s"
-    usuario = executar_consulta(query, (nome_completo, senha), fetch=True)
+    query = "SELECT * FROM usuarios WHERE rgf = %s AND senha = %s"
+    usuario = executar_consulta(query, (rgf, senha), fetch=True)
 
     if usuario:
         session["usuario"] = usuario[0]["nome_completo"]
         session["departamento"] = usuario[0]["departamento"]
-        session["cargo"] = usuario[0]["cargo"]  # ✅ Armazena o cargo também
+        session["cargo"] = usuario[0]["cargo"]
         return redirect(url_for("index"))
     else:
         return render_template("login.html", error_message="Credenciais inválidas.")

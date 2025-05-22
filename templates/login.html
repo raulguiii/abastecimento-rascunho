@@ -38,8 +38,9 @@
                     {% endif %}
 
                     <form action="{{ url_for('do_login') }}" method="post">
+                        <!-- Campo para RGF -->
                         <div class="input-group mb-3">
-                            <input type="text" name="nome_completo" class="form-control form-control-lg bg-light fs-6" placeholder="Nome Completo" required>
+                            <input type="text" name="rgf" class="form-control form-control-lg bg-light fs-6" placeholder="RGF" required>
                         </div>
 
                         <!-- Contêiner para o campo de senha e ícone -->
