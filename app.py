@@ -106,8 +106,16 @@ def registrar_abastecimentoAlmox():
     conn = conectar_bd()
     cursor = conn.cursor()
 
+    # Inserir na tabela específica (almoxarifado)
     cursor.execute("""
         INSERT INTO abastecimentoAlmox 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
+
+    # Inserir na tabela geral
+    cursor.execute("""
+        INSERT INTO abastecimentoGeral 
         (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
@@ -167,12 +175,19 @@ def registrar_abastecimentoCasaDeProjetos():
     conn = conectar_bd()
     cursor = conn.cursor()
 
+    # Inserir na tabela específica (Casa de Projetos)
     cursor.execute("""
         INSERT INTO abastecimentoCasaDeProjetos 
         (nome, rgf, km, placa, data, posto, litros, valor, comprovante)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (nome, rgf, km, placa, data, posto, litros, valor, caminho_comprovante))
 
+    # Inserir na tabela geral
+    cursor.execute("""
+        INSERT INTO abastecimentoGeral 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
 
     conn.commit()
     cursor.close()
@@ -230,6 +245,14 @@ def registrar_abastecimentoComunicacao():
         (nome, rgf, km, placa, data, posto, comprovante, litros, valor)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (nome, rgf, km, placa, data, posto, caminho_comprovante, litros, valor))
+
+    # Inserir na tabela geral
+    cursor.execute("""
+        INSERT INTO abastecimentoGeral 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
+
 
     conn.commit()
     cursor.close()
@@ -289,6 +312,14 @@ def registrar_abastecimentoDEE():
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (nome, rgf, km, placa, data, posto, litros, valor, caminho_comprovante))
 
+    # Inserir na tabela geral
+    cursor.execute("""
+        INSERT INTO abastecimentoGeral 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
+
+
     conn.commit()
     cursor.close()
     conn.close()
@@ -345,6 +376,13 @@ def registrar_abastecimentoEng1():
         (nome, rgf, km, placa, data, posto, litros, valor, comprovante)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (nome, rgf, km, placa, data, posto, litros, valor, caminho_comprovante))
+
+    # Inserir na tabela geral
+    cursor.execute("""
+        INSERT INTO abastecimentoGeral 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
 
     conn.commit()
     cursor.close()
@@ -403,6 +441,13 @@ def registrar_abastecimentoEng2():
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (nome, rgf, km, placa, data, posto, litros, valor, caminho_comprovante))
 
+    # Inserir na tabela geral
+    cursor.execute("""
+        INSERT INTO abastecimentoGeral 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
+
     conn.commit()
     cursor.close()
     conn.close()
@@ -460,6 +505,13 @@ def registrar_abastecimentoGabinete():
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (nome, rgf, km, placa, data, posto, litros, valor, caminho_comprovante))
 
+    # Inserir na tabela geral
+    cursor.execute("""
+        INSERT INTO abastecimentoGeral 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
+
     conn.commit()
     cursor.close()
     conn.close()
@@ -514,6 +566,13 @@ def registrar_abastecimentoInformatica():
         INSERT INTO abastecimentoInformatica (nome, rgf, km, placa, data, posto, litros, valor, comprovante)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (nome, rgf, km, placa, data, posto, litros, valor, caminho_comprovante))
+
+    # Inserir na tabela geral
+    cursor.execute("""
+        INSERT INTO abastecimentoGeral 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
 
     conn.commit()
     cursor.close()
@@ -572,6 +631,13 @@ def registrar_abastecimentoLogistica():
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (nome, rgf, km, placa, data, posto, litros, valor, caminho_comprovante))
 
+    # Inserir na tabela geral
+    cursor.execute("""
+        INSERT INTO abastecimentoGeral 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
+
     conn.commit()
     cursor.close()
     conn.close()
@@ -625,6 +691,13 @@ def registrar_abastecimentoNucleo():
         INSERT INTO abastecimentoNucleo (nome, rgf, km, placa, data, posto, comprovante, litros, valor)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (nome, rgf, km, placa, data, posto, caminho_comprovante, litros, valor))
+
+    # Inserir na tabela geral
+    cursor.execute("""
+        INSERT INTO abastecimentoGeral 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
 
     conn.commit()
     cursor.close()
@@ -681,6 +754,13 @@ def registrar_abastecimentoNutricao():
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (nome, rgf, km, placa, data, posto, valor, litros, caminho_comprovante))
 
+    # Inserir na tabela geral
+    cursor.execute("""
+        INSERT INTO abastecimentoGeral 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
+
     conn.commit()
     cursor.close()
     conn.close()
@@ -735,6 +815,13 @@ def registrar_abastecimentoSupervisao():
         INSERT INTO abastecimentoSupervisao (nome, rgf, km, placa, data, posto, litros, valor, comprovante)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (nome, rgf, km, placa, data, posto, litros, valor, caminho_comprovante))
+
+    # Inserir na tabela geral
+    cursor.execute("""
+        INSERT INTO abastecimentoGeral 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
 
     conn.commit()
     cursor.close()
@@ -791,6 +878,13 @@ def registrar_abastecimentoVigilancia():
         INSERT INTO abastecimentoVigilancia (nome, rgf, km, placa, data, posto, litros, valor, comprovante)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
     """, (nome, rgf, km, placa, data, posto, litros, valor, caminho_comprovante))
+
+    # Inserir na tabela geral
+    cursor.execute("""
+        INSERT INTO abastecimentoGeral 
+        (nome, rgf, km, placa, data, posto, comprovante, valor, litros)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (nome, rgf, km, placa, data, posto, caminho_comprovante, valor, litros))
 
     conn.commit()
     cursor.close()

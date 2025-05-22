@@ -26,6 +26,11 @@
                             <i class="fa-solid fa-list pe-2"></i> <strong>INÍCIO</strong>
                         </a>
                     </li>
+                    <li class="sidebar-item" {% if cargo_usuario in ['Motorista','motorista' ] %}style="display: none;"{% endif %}>
+                        <a href="#" class="sidebar-link tab-link" data-tab="abastecimentoGeral">
+                            <i class="fa-solid fa-list pe-2"></i> <strong>ABASTECIMENTO GERAL</strong>
+                        </a>
+                    </li>
                 </ul>
     
                 <ul class="sidebar-nav">
@@ -281,7 +286,18 @@
             <p class="mt-4">🔔 <strong>Mantenha suas informações sempre atualizadas e siga as diretrizes para o bom funcionamento do sistema.</strong></p>
             <p>❓ <strong>Caso tenha dúvidas, entre em contato com o responsável pelo seu departamento.</strong></p>
         </div>
+
+
+                    <!-- A B A S T E C I M E N T O      G E R A L  -->
+
+                    <div id="abastecimentoGeral" class="tab-pane fade show active">
+                                    <h3>Geral</h3>
+                        
+                    </div>
                     
+
+
+
 
                     <!-- A L M O X A R I F A D O -->
 
