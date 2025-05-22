@@ -291,43 +291,52 @@
                     <!-- A B A S T E C I M E N T O      G E R A L  -->
 
                     <div id="abastecimentoGeral" class="tab-pane fade show active">
-                    <h3>
-                        <img src="static/image/visao-geral.png" alt="" style="width: 24px; height: 24px; margin-right: 8px;">
-                        ABASTECIMENTO GERAL
-                    </h3> 
-                    <p>Todos abastecimentos realizados em Março</p>
-                    <div style="overflow-x: auto; max-width: 100%;">
-                        <table border="1" style="width: 100%; min-width: 700px;">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nome</th>
-                                    <th>RGF</th>
-                                    <th>KM</th>
-                                    <th>Placa</th>
-                                    <th>Data</th>
-                                    <th>Posto</th>
-                                    <th>Litros</th>
-                                    <th>Valor Total (R$)</th>
-                                    <th>Valor por Litro (R$)</th>
-                                    <th>Comprovante</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tabelaAbastecimentosGeral">
-                                <!-- Dados dinâmicos -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    fetch("/abastecimentoGeralHist")
-                        .then(response => response.json())
-                        .then(data => {
-                            const tabela = document.getElementById("tabelaAbastecimentosGeral");
-                            tabela.innerHTML = ""; // Limpa antes de preencher
+                        <h3>
+                            <img src="static/image/visao-geral.png" alt="" style="width: 24px; height: 24px; margin-right: 8px;">
+                            ABASTECIMENTO GERAL
+                        </h3> 
+                        <p>Todos abastecimentos realizados em Março</p>
 
-                            data.forEach(abastecimento => {
+                        <!-- Filtros -->
+                        <div style="margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 16px;">
+                            <input type="text" id="filtroNome" placeholder="Filtrar por Nome" style="padding: 6px;">
+                            <input type="text" id="filtroPlaca" placeholder="Filtrar por Placa" style="padding: 6px;">
+                            <input type="number" id="filtroValor" placeholder="Filtrar por Valor Total" style="padding: 6px;">
+                        </div>
+
+                        <div style="overflow-x: auto; max-width: 100%;">
+                            <table border="1" style="width: 100%; min-width: 700px;">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>RGF</th>
+                                        <th>KM</th>
+                                        <th>Placa</th>
+                                        <th>Data</th>
+                                        <th>Posto</th>
+                                        <th>Litros</th>
+                                        <th>Valor Total (R$)</th>
+                                        <th>Valor por Litro (R$)</th>
+                                        <th>Comprovante</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabelaAbastecimentosGeral">
+                                    <!-- Dados dinâmicos -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        let dadosOriginais = [];
+
+                        function renderTabela(dados) {
+                            const tabela = document.getElementById("tabelaAbastecimentosGeral");
+                            tabela.innerHTML = "";
+
+                            dados.forEach(abastecimento => {
                                 const litros = parseFloat(abastecimento.litros);
                                 const valor = parseFloat(abastecimento.valor);
                                 const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
@@ -345,13 +354,40 @@
                                     <td>R$ ${valorPorLitro.toFixed(2)}</td>
                                     <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
                                 </tr>`;
-
                                 tabela.innerHTML += row;
                             });
-                        })
-                        .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-                });
-                </script>
+                        }
+
+                        function aplicarFiltros() {
+                            const nomeFiltro = document.getElementById("filtroNome").value.toLowerCase();
+                            const placaFiltro = document.getElementById("filtroPlaca").value.toLowerCase();
+                            const valorFiltro = parseFloat(document.getElementById("filtroValor").value);
+
+                            const filtrados = dadosOriginais.filter(item => {
+                                const nomeCond = item.nome.toLowerCase().includes(nomeFiltro);
+                                const placaCond = item.placa.toLowerCase().includes(placaFiltro);
+                                const valorCond = isNaN(valorFiltro) || parseFloat(item.valor) === valorFiltro;
+
+                                return nomeCond && placaCond && valorCond;
+                            });
+
+                            renderTabela(filtrados);
+                        }
+
+                        fetch("/abastecimentoGeralHist")
+                            .then(response => response.json())
+                            .then(data => {
+                                dadosOriginais = data;
+                                renderTabela(data);
+                            })
+                            .catch(error => console.error("Erro ao carregar abastecimentos:", error));
+
+                        document.getElementById("filtroNome").addEventListener("input", aplicarFiltros);
+                        document.getElementById("filtroPlaca").addEventListener("input", aplicarFiltros);
+                        document.getElementById("filtroValor").addEventListener("input", aplicarFiltros);
+                    });
+                    </script>
+
                         
                     
                     
