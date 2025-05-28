@@ -331,65 +331,6 @@
                         </div>
                     </div>
 
-                    <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        let dadosOriginais = [];
-
-                        function renderTabela(dados) {
-                            const tabela = document.getElementById("tabelaAbastecimentosGeral");
-                            tabela.innerHTML = "";
-
-                            dados.forEach((abastecimento, index) => {
-                                const litros = parseFloat(abastecimento.litros);
-                                const valor = parseFloat(abastecimento.valor);
-                                const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                                const row = `<tr>
-                                    <td>${index + 1}</td>
-                                    <td>${abastecimento.nome}</td>
-                                    <td>${abastecimento.rgf}</td>
-                                    <td>${abastecimento.km}</td>
-                                    <td>${abastecimento.placa}</td>
-                                    <td>${abastecimento.data}</td>
-                                    <td>${abastecimento.posto}</td>
-                                    <td>${litros.toFixed(2)} L</td>
-                                    <td>R$ ${valor.toFixed(2)}</td>
-                                    <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                                    <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                                </tr>`;
-                                tabela.innerHTML += row;
-                            });
-                        }
-
-                        function aplicarFiltros() {
-                            const nomeFiltro = document.getElementById("filtroNome").value.toLowerCase();
-                            const placaFiltro = document.getElementById("filtroPlaca").value.toLowerCase();
-                            const valorFiltro = parseFloat(document.getElementById("filtroValor").value);
-
-                            const filtrados = dadosOriginais.filter(item => {
-                                const nomeCond = item.nome.toLowerCase().includes(nomeFiltro);
-                                const placaCond = item.placa.toLowerCase().includes(placaFiltro);
-                                const valorCond = isNaN(valorFiltro) || parseFloat(item.valor) === valorFiltro;
-
-                                return nomeCond && placaCond && valorCond;
-                            });
-
-                            renderTabela(filtrados);
-                        }
-
-                        fetch("/abastecimentoGeralHist")
-                            .then(response => response.json())
-                            .then(data => {
-                                dadosOriginais = data;
-                                renderTabela(data);
-                            })
-                            .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-
-                        document.getElementById("filtroNome").addEventListener("input", aplicarFiltros);
-                        document.getElementById("filtroPlaca").addEventListener("input", aplicarFiltros);
-                        document.getElementById("filtroValor").addEventListener("input", aplicarFiltros);
-                    });
-                    </script>
 
                         
                     
@@ -483,43 +424,6 @@
     </div>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    fetch("/abastecimentoAlmoxarifadoHist")
-        .then(response => response.json())
-        .then(data => {
-            const tabela = document.getElementById("tabelaAbastecimentosAlmox");
-            tabela.innerHTML = ""; // Limpa antes de preencher
-
-            data.forEach(abastecimento => {
-                const litros = parseFloat(abastecimento.litros);
-                const valor = parseFloat(abastecimento.valor);
-                const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                const row = `<tr>
-                    <td>${abastecimento.id}</td>
-                    <td>${abastecimento.nome}</td>
-                    <td>${abastecimento.rgf}</td>
-                    <td>${abastecimento.km}</td>
-                    <td>${abastecimento.placa}</td>
-                    <td>${abastecimento.data}</td>
-                    <td>${abastecimento.posto}</td>
-                    <td>${litros.toFixed(2)} L</td>
-                    <td>R$ ${valor.toFixed(2)}</td>
-                    <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                    <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                </tr>`;
-
-                tabela.innerHTML += row;
-            });
-        })
-        .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-});
-</script>
-
-
-
-
 
 
 
@@ -611,42 +515,6 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         </div>
             
-            <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                fetch("/abastecimentoCasaDeProjetosHist")
-                    .then(response => response.json())
-                    .then(data => {
-                        const tabela = document.getElementById("tabelaAbastecimentosCasaDeProjetos");
-                        tabela.innerHTML = ""; // Limpa antes de preencher
-
-                        data.forEach(abastecimento => {
-                            const litros = parseFloat(abastecimento.litros);
-                            const valor = parseFloat(abastecimento.valor);
-                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                            const row = `<tr>
-                                <td>${abastecimento.id}</td>
-                                <td>${abastecimento.nome}</td>
-                                <td>${abastecimento.rgf}</td>
-                                <td>${abastecimento.km}</td>
-                                <td>${abastecimento.placa}</td>
-                                <td>${abastecimento.data}</td>
-                                <td>${abastecimento.posto}</td>
-                                <td>${litros.toFixed(2)} L</td>
-                                <td>R$ ${valor.toFixed(2)}</td>
-                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                            </tr>`;
-                            tabela.innerHTML += row;
-                        });
-                    })
-                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-            });
-            </script>
-                  
-
-
-
 
 
                     
@@ -736,44 +604,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 </table>
             </div>
         </div>
-            
-            <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                fetch("/abastecimentoComunHist")
-                    .then(response => response.json())
-                    .then(data => {
-                        const tabela = document.getElementById("tabelaAbastecimentosComunicacao");
-                        tabela.innerHTML = "";
-
-                        data.forEach(abastecimento => {
-                            const litros = parseFloat(abastecimento.litros);
-                            const valor = parseFloat(abastecimento.valor);
-                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                            const row = `<tr>
-                                <td>${abastecimento.id}</td>
-                                <td>${abastecimento.nome}</td>
-                                <td>${abastecimento.rgf}</td>
-                                <td>${abastecimento.km}</td>
-                                <td>${abastecimento.placa}</td>
-                                <td>${abastecimento.data}</td>
-                                <td>${abastecimento.posto}</td>
-                                <td>${litros.toFixed(2)} L</td>
-                                <td>R$ ${valor.toFixed(2)}</td>
-                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                            </tr>`;
-                            tabela.innerHTML += row;
-                        });
-                    })
-                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-            });
-            </script>
-
-                  
-
-
-
+    
 
 
                     
@@ -2060,6 +1891,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="static/js/script.js"></script>
+    <script src="static/js/abastecimentogeral.js"></script>
+    <script src="static/js/almoxarifado.js"></script>
+    <script src="static/js/casadeprojetos.js"></script>
+    <script src="static/js/comunicacao.js"></script>
 </body>
 </html>
 
