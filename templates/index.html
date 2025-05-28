@@ -695,46 +695,9 @@
             </div>
         </div>
             
-            <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                fetch("/abastecimentoDEEHist")
-                    .then(response => response.json())
-                    .then(data => {
-                        const tabela = document.getElementById("tabelaAbastecimentosDEE");
-                        tabela.innerHTML = ""; // limpa a tabela antes
+           
 
-                        data.forEach(abastecimento => {
-                            const litros = parseFloat(abastecimento.litros);
-                            const valor = parseFloat(abastecimento.valor);
-                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                            const row = `<tr>
-                                <td>${abastecimento.id}</td>
-                                <td>${abastecimento.nome}</td>
-                                <td>${abastecimento.rgf}</td>
-                                <td>${abastecimento.km}</td>
-                                <td>${abastecimento.placa}</td>
-                                <td>${abastecimento.data}</td>
-                                <td>${abastecimento.posto}</td>
-                                <td>${litros.toFixed(2)} L</td>
-                                <td>R$ ${valor.toFixed(2)}</td>
-                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                            </tr>`;
-                            tabela.innerHTML += row;
-                        });
-                    })
-                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-            });
-            </script>
-
-
-
-        
-
-
-         
-
+      
 
             <!-- E N G E N H A R I A        M A N U T E N Ç A O  -->
 
@@ -821,40 +784,6 @@
             </div>
         </div>
             
-            <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                fetch("/abastecimentoEng1Hist")
-                    .then(response => response.json())
-                    .then(data => {
-                        const tabela = document.getElementById("tabelaAbastecimentosEng1");
-                        tabela.innerHTML = ""; // Limpa a tabela
-
-                        data.forEach(abastecimento => {
-                            const litros = parseFloat(abastecimento.litros);
-                            const valor = parseFloat(abastecimento.valor);
-                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                            const row = `<tr>
-                                <td>${abastecimento.id}</td>
-                                <td>${abastecimento.nome}</td>
-                                <td>${abastecimento.rgf}</td>
-                                <td>${abastecimento.km}</td>
-                                <td>${abastecimento.placa}</td>
-                                <td>${abastecimento.data}</td>
-                                <td>${abastecimento.posto}</td>
-                                <td>${litros.toFixed(2)} L</td>
-                                <td>R$ ${valor.toFixed(2)}</td>
-                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                            </tr>`;
-                            tabela.innerHTML += row;
-                        });
-                    })
-                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-            });
-            </script>
-
-
 
 
 
@@ -947,40 +876,6 @@
             </div>
         </div>
             
-            <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                fetch("/abastecimentoEng2Hist")
-                    .then(response => response.json())
-                    .then(data => {
-                        const tabela = document.getElementById("tabelaAbastecimentosEng2");
-                        tabela.innerHTML = ""; // Limpa antes de preencher
-
-                        data.forEach(abastecimento => {
-                            const litros = parseFloat(abastecimento.litros);
-                            const valor = parseFloat(abastecimento.valor);
-                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                            const row = `<tr>
-                                <td>${abastecimento.id}</td>
-                                <td>${abastecimento.nome}</td>
-                                <td>${abastecimento.rgf}</td>
-                                <td>${abastecimento.km}</td>
-                                <td>${abastecimento.placa}</td>
-                                <td>${abastecimento.data}</td>
-                                <td>${abastecimento.posto}</td>
-                                <td>${litros.toFixed(2)} L</td>
-                                <td>R$ ${valor.toFixed(2)}</td>
-                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                            </tr>`;
-                            tabela.innerHTML += row;
-                        });
-                    })
-                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-            });
-            </script>
-
-
 
 
 
@@ -1072,46 +967,7 @@
                     </table>
                 </div>
             </div>
-                
-                <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    fetch("/abastecimentoGabineteHist")
-                        .then(response => response.json())
-                        .then(data => {
-                            const tabela = document.getElementById("tabelaGABINETE");
-                            tabela.innerHTML = ""; // limpa antes de preencher
-
-                            data.forEach(abastecimento => {
-                                const litros = parseFloat(abastecimento.litros);
-                                const valor = parseFloat(abastecimento.valor);
-                                const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                                const row = `<tr>
-                                    <td>${abastecimento.id}</td>
-                                    <td>${abastecimento.nome}</td>
-                                    <td>${abastecimento.rgf}</td>
-                                    <td>${abastecimento.km}</td>
-                                    <td>${abastecimento.placa}</td>
-                                    <td>${abastecimento.data}</td>
-                                    <td>${abastecimento.posto}</td>
-                                    <td>${litros.toFixed(2)} L</td>
-                                    <td>R$ ${valor.toFixed(2)}</td>
-                                    <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                                    <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                                </tr>`;
-                                tabela.innerHTML += row;
-                            });
-                        })
-                        .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-                });
-                </script>
-    
-
-
-
-
-
-
+  
 
 
 
@@ -1200,45 +1056,7 @@
             </div>
         </div>
             
-            <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                fetch("/abastecimentoInformaticaHist")
-                    .then(response => response.json())
-                    .then(data => {
-                        const tabela = document.getElementById("tabelaINFORMATICA");
-                        tabela.innerHTML = ""; // Limpa antes de preencher
-
-                        data.forEach(abastecimento => {
-                            const litros = parseFloat(abastecimento.litros);
-                            const valor = parseFloat(abastecimento.valor);
-                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                            const row = `<tr>
-                                <td>${abastecimento.id}</td>
-                                <td>${abastecimento.nome}</td>
-                                <td>${abastecimento.rgf}</td>
-                                <td>${abastecimento.km}</td>
-                                <td>${abastecimento.placa}</td>
-                                <td>${abastecimento.data}</td>
-                                <td>${abastecimento.posto}</td>
-                                <td>${litros.toFixed(2)} L</td>
-                                <td>R$ ${valor.toFixed(2)}</td>
-                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                            </tr>`;
-                            tabela.innerHTML += row;
-                        });
-                    })
-                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-            });
-            </script>
-
-
-
-
-
-
-
+            
 
 
             <!-- L O G I S T I C A -->
@@ -1319,52 +1137,12 @@
                             <th>Comprovante</th>
                         </tr>
                     </thead>
-                    <tbody id="tabelaLOGÍSTICA">
+                    <tbody id="tabelaLOGISTICA">
                         <!-- Os dados serão preenchidos dinamicamente -->
                     </tbody>
                 </table>
             </div>
             </div>
-            
-            <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                fetch("/abastecimentoLogisticaHist")
-                    .then(response => response.json())
-                    .then(data => {
-                        const tabela = document.getElementById("tabelaLOGÍSTICA");
-                        tabela.innerHTML = ""; // Limpa a tabela antes de preencher
-
-                        data.forEach(abastecimento => {
-                            const litros = parseFloat(abastecimento.litros);
-                            const valor = parseFloat(abastecimento.valor);
-                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                            const row = `<tr>
-                                <td>${abastecimento.id}</td>
-                                <td>${abastecimento.nome}</td>
-                                <td>${abastecimento.rgf}</td>
-                                <td>${abastecimento.km}</td>
-                                <td>${abastecimento.placa}</td>
-                                <td>${abastecimento.data}</td>
-                                <td>${abastecimento.posto}</td>
-                                <td>${litros.toFixed(2)} L</td>
-                                <td>R$ ${valor.toFixed(2)}</td>
-                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                            </tr>`;
-                            tabela.innerHTML += row;
-                        });
-                    })
-                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-            });
-            </script>
-
-
-
-
-
-
-
 
 
 
@@ -1453,45 +1231,7 @@
             </div>
         </div>
             
-            <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                fetch("/abastecimentoNucleoHist")
-                    .then(response => response.json())
-                    .then(data => {
-                        const tabela = document.getElementById("tabelaNucleo");
-                        tabela.innerHTML = ""; // Limpa antes de preencher
-
-                        data.forEach(abastecimento => {
-                            const litros = parseFloat(abastecimento.litros);
-                            const valor = parseFloat(abastecimento.valor);
-                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                            const row = `<tr>
-                                <td>${abastecimento.id}</td>
-                                <td>${abastecimento.nome}</td>
-                                <td>${abastecimento.rgf}</td>
-                                <td>${abastecimento.km}</td>
-                                <td>${abastecimento.placa}</td>
-                                <td>${abastecimento.data}</td>
-                                <td>${abastecimento.posto}</td>
-                                <td>${litros.toFixed(2)} L</td>
-                                <td>R$ ${valor.toFixed(2)}</td>
-                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                            </tr>`;
-                            tabela.innerHTML += row;
-                        });
-                    })
-                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-            });
-            </script>
-
-            
-      
-        
-
-
-
+           
 
 
             <!-- N U T R I C A O-->
@@ -1579,43 +1319,7 @@
             </div>
         </div>
             
-            <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                fetch("/abastecimentoNutricaoHist")
-                    .then(response => response.json())
-                    .then(data => {
-                        const tabela = document.getElementById("tabelaNutricao");
-                        tabela.innerHTML = ""; // limpa antes
-
-                        data.forEach(abastecimento => {
-                            const litros = parseFloat(abastecimento.litros);
-                            const valor = parseFloat(abastecimento.valor);
-                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                            const row = `<tr>
-                                <td>${abastecimento.id}</td>
-                                <td>${abastecimento.nome}</td>
-                                <td>${abastecimento.rgf}</td>
-                                <td>${abastecimento.km}</td>
-                                <td>${abastecimento.placa}</td>
-                                <td>${abastecimento.data}</td>
-                                <td>${abastecimento.posto}</td>
-                                <td>${litros.toFixed(2)} L</td>
-                                <td>R$ ${valor.toFixed(2)}</td>
-                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                            </tr>`;
-                            tabela.innerHTML += row;
-                        });
-                    })
-                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-            });
-            </script>
-
-
-
-
-
+            
 
 
 
@@ -1703,39 +1407,6 @@
             </div>
         </div>
             
-            <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                fetch("/abastecimentoSupervisaoHist")
-                    .then(response => response.json())
-                    .then(data => {
-                        const tabela = document.getElementById("tabelaSupervisao");
-                        tabela.innerHTML = ""; // Limpa antes de preencher
-
-                        data.forEach(abastecimento => {
-                            const litros = parseFloat(abastecimento.litros);
-                            const valor = parseFloat(abastecimento.valor);
-                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                            const row = `<tr>
-                                <td>${abastecimento.id}</td>
-                                <td>${abastecimento.nome}</td>
-                                <td>${abastecimento.rgf}</td>
-                                <td>${abastecimento.km}</td>
-                                <td>${abastecimento.placa}</td>
-                                <td>${abastecimento.data}</td>
-                                <td>${abastecimento.posto}</td>
-                                <td>${litros.toFixed(2)} L</td>
-                                <td>R$ ${valor.toFixed(2)}</td>
-                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                            </tr>`;
-                            tabela.innerHTML += row;
-                        });
-                    })
-                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-            });
-            </script>
-
 
 
 
@@ -1829,40 +1500,6 @@
             </div>
             </div>
             
-            <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                fetch("/abastecimentoVigilanciaHist")
-                    .then(response => response.json())
-                    .then(data => {
-                        const tabela = document.getElementById("tabelaVigilancia");
-                        tabela.innerHTML = "";
-
-                        data.forEach(abastecimento => {
-                            const litros = parseFloat(abastecimento.litros);
-                            const valor = parseFloat(abastecimento.valor);
-                            const valorPorLitro = (litros > 0) ? (valor / litros) : 0;
-
-                            const row = `<tr>
-                                <td>${abastecimento.id}</td>
-                                <td>${abastecimento.nome}</td>
-                                <td>${abastecimento.rgf}</td>
-                                <td>${abastecimento.km}</td>
-                                <td>${abastecimento.placa}</td>
-                                <td>${abastecimento.data}</td>
-                                <td>${abastecimento.posto}</td>
-                                <td>${litros.toFixed(2)} L</td>
-                                <td>R$ ${valor.toFixed(2)}</td>
-                                <td>R$ ${valorPorLitro.toFixed(2)}</td>
-                                <td><a href="${abastecimento.comprovante}" target="_blank">Ver Comprovante</a></td>
-                            </tr>`;
-                            tabela.innerHTML += row;
-                        });
-                    })
-                    .catch(error => console.error("Erro ao carregar abastecimentos:", error));
-            });
-            </script>
-
-
 
 
 
